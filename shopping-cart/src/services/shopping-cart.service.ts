@@ -16,7 +16,7 @@ export class ShoppingCartService {
     @InjectRepository(Item)
     private cartRepository: Repository<Cart>,
   ) {
-    this.URL_CATALOG = 'http://localhost:3003/verify-product';
+    this.URL_CATALOG = 'http://localhost:3003/catalog/verify-product';
   }
 
   async getShoppingCart(cartID: string) {

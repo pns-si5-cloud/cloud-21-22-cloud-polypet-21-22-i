@@ -3,11 +3,12 @@ import { ProductRequestController } from './controllers/product-request/product-
 import { ProductRequest } from './models/product-request';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductRequestService } from './services/product-request/product-request.service';
+import { HttpModule } from '@nestjs/axios';
 
 const dbSocketAddr = process.env.DB_HOST?.split(':');
 
 @Module({
-  imports: [
+  imports: [HttpModule,
     TypeOrmModule.forFeature([ProductRequest]),
     TypeOrmModule.forRoot({
       type: 'postgres',

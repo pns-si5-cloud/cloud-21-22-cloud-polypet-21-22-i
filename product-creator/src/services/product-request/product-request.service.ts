@@ -3,6 +3,7 @@ import { ProductRequest } from 'src/models/product-request';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HttpService } from '@nestjs/axios';
+import { Product } from 'src/models/product';
 
 @Injectable()
 export class ProductRequestService {
@@ -15,40 +16,25 @@ export class ProductRequestService {
       ) {}
 
     async addNewProduct(name: string, price: number, category: string, description: string, partner_id: any, ingredient: string, dimension: string) {
-        var product:{
-            name:string,
-            price:number,
-            category:string,
-            description:string,
-            partnerID:string,
-            ingredient:string,
-            dimension:string
-        };
+        var product = new Product();
 
         product.name = name;
-        product.price = price;
+        product.price = +price;
         product.category = category;
         product.description = description;
         product.partnerID = partner_id;
         product.ingredient = ingredient;
         product.dimension = dimension;
 
+        console.log(JSON.stringify(product));
         this.http.post(this.URL_CATALOG, product).subscribe({
-            next : (response)=> console.log(response),
+            next : (response)=> console.log("send"),
             error : (error)=> console.error(error),
         });
     }
 
     async validateRequest(id: number) {
-        var product:{
-            name:string,
-            price:number,
-            category:string,
-            description:string,
-            partnerID:string,
-            ingredient:string,
-            dimension:string
-        };
+        var product = new Product();
 
         var productRequest = await this.productRequestRepository.findOne(id);
         if (productRequest) {

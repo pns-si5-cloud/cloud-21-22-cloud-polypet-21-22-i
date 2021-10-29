@@ -4,9 +4,9 @@ import { Delivery } from "./Delivery";
 @Entity()
 export class Items {
 
-    @ManyToOne(()=>Delivery)
+    @ManyToOne(()=>Delivery,(deliver)=>deliver.items)
     delivery:Delivery
-    
+
     @PrimaryColumn({name:"product_id"})
     ProductID: number;
 

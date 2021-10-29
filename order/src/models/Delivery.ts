@@ -7,7 +7,7 @@ export class Delivery {
     @PrimaryGeneratedColumn()
     temporaryId:number
 
-    @OneToMany(type => Items, items => items.ProductID)
+    @OneToMany(type => Items, items => items.delivery)
     items: Items[];
 
     @PrimaryColumn({name:"delivery_id"})

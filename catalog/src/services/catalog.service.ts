@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NonDetailedProduct } from 'src/models/NonDetailedProduct';
 import { Product } from 'src/models/Product';
-import { Repository } from 'typeorm';
+import { ShoppingCartProduct } from 'src/models/ShoppingCartProduct';
+import { Between, Repository } from 'typeorm';
 
 @Injectable()
 export class CatalogService {
@@ -26,26 +27,44 @@ export class CatalogService {
     }
 
 
-    public async getAllNonDetailedProduct():Promise<NonDetailedProduct[]>{
-        var productList = await this.productRepository.find();
+    public async getAllNonDetailedProducts():Promise<NonDetailedProduct[]>{
+        var productsList = await this.productRepository.find();
 
-        var nonDetailedProductList:NonDetailedProduct[] = [];
+        var nonDetailedProductsList:NonDetailedProduct[] = [];
 
-        for(let product of productList){
+        for(let product of productsList){
             //TODO partner NAME !! (et pas ID)
             var ndProd = new NonDetailedProduct(product.product_id,product.name,product.description);
-            nonDetailedProductList.push(ndProd);
+            nonDetailedProductsList.push(ndProd);
         }
-        console.log("Get all non detailed product : "+JSON.stringify(nonDetailedProductList));
-        return nonDetailedProductList;
+        console.log("Get all non detailed product : "+JSON.stringify(nonDetailedProductsList));
+        return nonDetailedProductsList;
     }
 
     public async getDetailedProduct(productID:string):Promise<Product>{
         var product = await this.productRepository.findOne({where:{product_id:productID}});
+        console.log("Get product : "+JSON.stringify(product));
         return product;
     }
 
-    public async getLatestProducts(){
+    public async getLatestProducts():Promise<Product[]>{
+
+        var now = new Date();
+        var tenDaysBefore = new Date();
+        tenDaysBefore.setDate(tenDaysBefore.getDate()-10)
+
+        var lastestProductsList = await this.productRepository.find({where:{addedDate:Between(tenDaysBefore,now)}});
+        console.log("Get latest products : "+JSON.stringify(lastestProductsList));
+        return lastestProductsList;
+    }
+
+    public async verifyAndReturnCartProduct(productID:string):Promise<ShoppingCartProduct>{
+        var product = await this.productRepository.findOne({where:{product_id:productID}});
+        console.log("Verify product and found : "+JSON.stringify(product));
+
+        var ShoppingCartProduct = new ShoppingCartProduct(product.product_id,product.name,+product.price);
+        console.log("Return shopping cart product : "+JSON.stringify(ShoppingCartProduct));
+        return ShoppingCartProduct;
     }
 }
 

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CatalogService } from 'src/services/catalog.service';
 
 @Controller('catalog')
@@ -16,11 +16,11 @@ export class CatalogController {
     @Get('get-all-product')
     getAllProduct(){
         console.log("[getAllProduct]");
-        return this.catalogService.getAllNonDetailedProduct();
+        return this.catalogService.getAllNonDetailedProducts();
     }
 
     @Get('get-detailed-product')
-    getDetailedProduct(@Body('productID') productID:string){
+    getDetailedProduct(@Query('productID') productID:string){
         console.log("[getDetailedProduct]");
         return this.catalogService.getDetailedProduct(productID);
     }
@@ -29,5 +29,11 @@ export class CatalogController {
     getLatestProducts(){
         console.log("[getLategetLatestProductsstProduct]");
         return this.catalogService.getLatestProducts();
+    }
+
+    @Get('verify-product')
+    verifyAndReturnCartProduct(@Query('productID') productID:string){
+        console.log("[verifyAndReturnCartProduct]");
+        return this.catalogService.verifyAndReturnCartProduct(productID);
     }
 }

@@ -4,10 +4,6 @@ import { AppModule } from './app.module';
 const dbSocketAddr = process.env.DB_HOST?.split(':');
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT || 3003);
-  console.log("-------------------------- CATALOG -------------------------");
-
   console.log(JSON.stringify({
     type: 'postgres',
     host: dbSocketAddr?dbSocketAddr[0]:'database',
@@ -18,5 +14,10 @@ async function bootstrap() {
     entities: [],
     synchronize: true,
   }));
+  const app = await NestFactory.create(AppModule);
+  await app.listen(process.env.PORT || 3003);
+  console.log("-------------------------- CATALOG -------------------------");
+
+
 }
 bootstrap();

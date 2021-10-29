@@ -1,13 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Cart } from './Cart';
 
 @Entity('item')
 export class Item {
-  constructor(productID, quantity, productPrice, productName) {
-    this.productID = productID;
-    this.quantity = quantity;
-    this.productPrice = productPrice;
-    this.productName = productName;
-  }
 
   @PrimaryGeneratedColumn()
   temporaryID: number;
@@ -23,4 +18,7 @@ export class Item {
 
   @Column()
   productName: string;
+
+  @ManyToOne(()=> Cart, cart => cart.items)
+  cart: Cart;
 }

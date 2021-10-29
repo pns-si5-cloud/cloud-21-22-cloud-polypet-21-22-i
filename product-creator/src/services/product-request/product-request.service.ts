@@ -27,7 +27,7 @@ export class ProductRequestService {
         product.dimension = dimension;
 
         this.http.post(this.URL_CATALOG, {product}).subscribe({
-            next : (response)=> console.log("send"),
+            next : (response)=> console.log("Send to Catalog"),
             error : (error)=> console.error(error),
         });
     }
@@ -46,7 +46,7 @@ export class ProductRequestService {
             product.dimension = productRequest.dimension;
 
             this.http.post(this.URL_CATALOG, {product}).subscribe({
-                next : (response) => console.log(response),
+                next : (response) => console.log("Send to catalog"),
                 error : (error) => console.error(error),
             })
         }

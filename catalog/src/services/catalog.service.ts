@@ -23,7 +23,7 @@ export class CatalogService {
         addedProduct.price = +productReq.price;
 
         this.productRepository.save(addedProduct);
-        console.log("new product added to catalog")
+        console.log("new product added to catalog - : "+JSON.stringify(addedProduct));
     }
 
 

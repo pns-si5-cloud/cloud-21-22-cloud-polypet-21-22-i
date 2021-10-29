@@ -47,7 +47,7 @@ export class ProductRequestService {
             product.ingredient = productRequest.ingredient;
             product.dimension = productRequest.dimension;
 
-            this.http.post(this.URL_CATALOG, product).subscribe({
+            this.http.post(this.URL_CATALOG, {product}).subscribe({
                 next : (response) => console.log(response),
                 error : (error) => console.error(error),
             })

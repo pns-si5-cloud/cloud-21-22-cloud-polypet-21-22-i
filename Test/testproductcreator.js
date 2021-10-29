@@ -23,8 +23,11 @@ async function main(){
     response = await doRequest({ url: "http://product-creator:3004/product-request/add-new-product", form:{name:name, price:price, category:category, description:description, partner_id:partner_id, ingredient:ingredient, dimension:dimension}, method: "POST"});
     console.log(response.body);
 
-    //response = await doRequest({ url: "http://product-creator:3004/product-request/add-new-product-request", form:{name:name2, price:price2, category:category2, description:description2, partner_id:partner_id2, ingredient:ingredient2, dimension:dimension2}});
-    //var id = response.body;
+    response = await doRequest({ url: "http://product-creator:3004/product-request/add-new-product-request", form:{name:name2, price:price2, category:category2, description:description2, partner_id:partner_id2, ingredient:ingredient2, dimension:dimension2}, method: "POST"});
+    var id = response.body;
+    console.log("Product id : " + id);
+
+    response = await doRequest({ url: "http://product-creator:3004/product-request/validate-request", form:{request_id:id}, method: "POST"});
 }
 
 main();

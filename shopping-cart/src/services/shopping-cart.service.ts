@@ -92,7 +92,7 @@ export class ShoppingCartService {
       clientID: string;
       totalPrice: number;
       items: {
-        item: { productID: string; quatity: number };
+        item: { productID: string; quantity: number };
       }[];
     } = {
       cartID: cart.cartID,
@@ -102,7 +102,7 @@ export class ShoppingCartService {
     };
     items.forEach((item) => {
       message.items.push({
-        item: { productID: item.productID, quatity: item.quantity },
+        item: { productID: item.productID, quantity: item.quantity },
       });
     });
     return message;

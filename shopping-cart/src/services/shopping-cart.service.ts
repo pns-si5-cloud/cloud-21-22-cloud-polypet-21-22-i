@@ -31,12 +31,12 @@ export class ShoppingCartService {
       cartID: string;
       clientID: string;
       items: {
-        item: { productID: string; quatity: number };
+        item: { productID: string; quantity: number };
       }[];
     } = { cartID: cart.cartID, clientID: cart.clientID, items: [] };
     items.forEach((item) => {
       message.items.push({
-        item: { productID: item.productID, quatity: item.quantity },
+        item: { productID: item.productID, quantity: item.quantity },
       });
     });
     return message;

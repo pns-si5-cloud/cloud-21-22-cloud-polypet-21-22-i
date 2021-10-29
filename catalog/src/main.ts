@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
-const dbSocketAddr = process.env.DB_HOST.split(':');
+const dbSocketAddr = process.env.DB_HOST?.split(':');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -10,8 +10,8 @@ async function bootstrap() {
 
   console.log(JSON.stringify({
     type: 'postgres',
-    host: dbSocketAddr[0]||'database',
-    port: +dbSocketAddr[1]||5432,
+    host: dbSocketAddr?dbSocketAddr[0]:'database',
+    port: dbSocketAddr?+dbSocketAddr[1]:5432,
     username: process.env.DB_USER||'SI5-CLOUD',
     password: process.env.DB_PASS||'SI5-CLOUD',
     database: process.env.DB_NAME||'SI5-CLOUD',

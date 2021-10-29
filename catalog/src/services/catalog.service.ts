@@ -39,5 +39,13 @@ export class CatalogService {
         console.log("Get all non detailed product : "+JSON.stringify(nonDetailedProductList));
         return nonDetailedProductList;
     }
+
+    public async getDetailedProduct(productID:string):Promise<Product>{
+        var product = await this.productRepository.findOne({where:{product_id:productID}});
+        return product;
+    }
+
+    public async getLatestProducts(){
+    }
 }
 

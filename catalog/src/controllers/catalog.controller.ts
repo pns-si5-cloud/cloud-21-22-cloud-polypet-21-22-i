@@ -18,4 +18,16 @@ export class CatalogController {
         console.log("[getAllProduct]");
         return this.catalogService.getAllNonDetailedProduct();
     }
+
+    @Get('get-detailed-product')
+    getDetailedProduct(@Body('productID') productID:string){
+        console.log("[getDetailedProduct]");
+        return this.catalogService.getDetailedProduct(productID);
+    }
+
+    @Get('get-latest-products')
+    getLatestProducts(){
+        console.log("[getLategetLatestProductsstProduct]");
+        return this.catalogService.getLatestProducts();
+    }
 }

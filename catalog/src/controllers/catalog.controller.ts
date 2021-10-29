@@ -13,8 +13,8 @@ export class CatalogController {
         this.catalogService.addProductToCatalog(product);
     }
 
-    @Get('get-all-product')
-    getAllProduct(){
+    @Get('get-all-products')
+    getAllProducts(){
         console.log("[getAllProduct]");
         return this.catalogService.getAllNonDetailedProducts();
     }

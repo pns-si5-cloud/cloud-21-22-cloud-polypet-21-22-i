@@ -62,9 +62,9 @@ export class CatalogService {
         var product = await this.productRepository.findOne({where:{product_id:productID}});
         console.log("Verify product and found : "+JSON.stringify(product));
 
-        var ShoppingCartProduct = new ShoppingCartProduct(product.product_id,product.name,+product.price);
+        var shoppingCartProduct = new ShoppingCartProduct(product.product_id,product.name,+product.price);
         console.log("Return shopping cart product : "+JSON.stringify(ShoppingCartProduct));
-        return ShoppingCartProduct;
+        return shoppingCartProduct;
     }
 }
 

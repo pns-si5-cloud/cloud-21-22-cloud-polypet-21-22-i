@@ -27,7 +27,8 @@ export class ProductRequestService {
         product.dimension = dimension;
 
         console.log(JSON.stringify(product));
-        this.http.post(this.URL_CATALOG, product).subscribe({
+
+        this.http.post(this.URL_CATALOG, {product}).subscribe({
             next : (response)=> console.log("send"),
             error : (error)=> console.error(error),
         });

@@ -6,6 +6,7 @@ import { CatalogService } from './services/catalog.service';
 import { Product } from './models/Product';
 const dbSocketPath = process.env.DB_SOCKET_PATH || '/cloudsql';
 
+
 @Module({
   imports: [
     HttpModule,

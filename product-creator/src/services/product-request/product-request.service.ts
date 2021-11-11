@@ -49,6 +49,9 @@ export class ProductRequestService {
                 next : (response) => console.log("Send to catalog"),
                 error : (error) => console.error(error),
             })
+
+            await this.productRequestRepository.remove(productRequest);
+            console.log("Product sent to Catalog and deleted from database.");
         }
         else {
             throw new Error('Product ID invalid or doesn\'t exist');

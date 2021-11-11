@@ -19,6 +19,11 @@ export class ShoppingCartController {
     return await this.shoppingCartService.validateShoppingCart(clientID);
   }
 
+  @Get('cart')
+  async getShoppingCartByClientID(@Query('clientID') clientID: string) {
+    return await this.shoppingCartService.getShoppingCartByClientId(clientID);
+  }
+
   @Get()
   async getShoppingCart(@Query('cartID') cartID: string) {
     return await this.shoppingCartService.getShoppingCart(cartID);

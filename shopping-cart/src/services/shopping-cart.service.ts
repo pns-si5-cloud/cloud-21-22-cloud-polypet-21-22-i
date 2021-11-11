@@ -13,67 +13,115 @@ export class ShoppingCartService {
   constructor(
     private http: HttpService,
     @InjectRepository(Cart)
-    @InjectRepository(Item)
     private cartRepository: Repository<Cart>,
+    @InjectRepository(Item)
+    private itemRepository: Repository<Item>,
   ) {
-    this.URL_CATALOG = 'http://localhost:3003/catalog/verify-product';
+    this.URL_CATALOG = 'http://catalog:3003/catalog/verify-product';
   }
 
   async getShoppingCart(cartID: string) {
-    return await this.cartRepository.findOne({ where: { cartID: cartID } });
+    const cart = await this.cartRepository.findOne({
+      where: { cartID: cartID },
+    });
+    if (cart == undefined) return undefined;
+    const items = await this.itemRepository.find({
+      where: { cart: cart },
+    });
+    const message: {
+      cartID: string;
+      clientID: string;
+      items: {
+        item: { productID: string; quantity: number };
+      }[];
+    } = { cartID: cart.cartID, clientID: cart.clientID, items: [] };
+    for (const item of items) {
+      message.items.push({
+        item: { productID: item.productID, quantity: item.quantity },
+      });
+      await this.itemRepository.remove(item);
+    }
+    await this.cartRepository.remove(cart);
+    return message;
   }
 
   async addProduct(clientID: string, productID: string, quantity: number) {
     let cart = await this.cartRepository.findOne({
       where: { clientID: clientID },
     });
-    // il existe deja un cart pour ce client
+    let item;
     if (cart != undefined) {
-      let found = false;
-      // on regarde si des exemplaires du produits sont deja dans le cart
-      for (const item of cart.items) {
-        if (item.productID == productID) {
-          item.quantity += +quantity;
-          found = true;
-          break;
-        }
-      }
-      // si on en a pas trouvé, on l'ajoute
-      if (!found) {
-        const item = await this.createItem(productID, quantity);
-        cart.items.push(item);
+      item = await this.itemRepository.findOne({
+        where: { productID: productID, cart: cart.cartID },
+      });
+
+      if (item != undefined) {
+        item.quantity += +quantity;
+        cart.totalPrice += +quantity * item.productPrice;
+        await this.itemRepository.save(item);
+      } else {
+        item = await this.createItem(productID, quantity);
+        item.cart = cart;
         cart.totalPrice += item.quantity * item.productPrice;
       }
+    } else {
+      item = await this.createItem(productID, quantity);
+      cart = new Cart();
+      cart.clientID = clientID;
+      cart.totalPrice = item.quantity * item.productPrice;
+      cart.lastModifDate = new Date();
+      cart.items = [item];
     }
-    // il n'existe pas de cart pour ce client
-    else {
-      const item = await this.createItem(productID, quantity);
-      const items = [];
-      items.push(item);
-      cart = new Cart(
-        clientID,
-        item.quantity * item.productPrice,
-        new Date(),
-        items,
-      );
-    }
+    await this.itemRepository.save(item);
     await this.cartRepository.save(cart);
   }
 
   async validateShoppingCart(clientID: string) {
-    return await this.cartRepository.findOne({ where: { clientID: clientID } });
+    const cart = await this.cartRepository.findOne({
+      where: { clientID: clientID },
+    });
+    if (cart == undefined) return undefined;
+    return cart.cartID;
+  }
+
+  async getShoppingCartByClientId(clientID: string) {
+    const cart = await this.cartRepository.findOne({
+      where: { clientID: clientID },
+    });
+    if (cart == undefined) return undefined;
+    const items = await this.itemRepository.find({
+      where: { cart: cart },
+    });
+    const message: {
+      cartID: string;
+      clientID: string;
+      totalPrice: number;
+      items: {
+        item: { productID: string; quantity: number };
+      }[];
+    } = {
+      cartID: cart.cartID,
+      clientID: cart.clientID,
+      totalPrice: cart.totalPrice,
+      items: [],
+    };
+    items.forEach((item) => {
+      message.items.push({
+        item: { productID: item.productID, quantity: item.quantity },
+      });
+    });
+    return message;
   }
 
   private async createItem(productID: string, quantity: number) {
     const product = await firstValueFrom(
       this.http.get(this.URL_CATALOG, { params: { productID: productID } }),
     );
-    const item = new Item(
-      productID,
-      +quantity,
-      +product.data.productPrice,
-      product.data.productName,
-    );
+    const item = new Item();
+    item.productID = productID;
+    item.quantity = +quantity;
+    item.productPrice = +product.data.productPrice;
+    item.productName = product.data.productName;
     return item;
   }
 }

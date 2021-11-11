@@ -3,12 +3,7 @@ import { Item } from './Item';
 
 @Entity('cart')
 export class Cart {
-  constructor(clientID, totalPrice, lastModifDate, items) {
-    this.clientID = clientID;
-    this.totalPrice = totalPrice;
-    this.lastModifDate = lastModifDate;
-    this.items = items;
-  }
+
 
   @PrimaryGeneratedColumn('uuid')
   cartID: string;
@@ -22,6 +17,6 @@ export class Cart {
   @Column()
   lastModifDate: Date;
 
-  @OneToMany((type) => Item, (items) => items.temporaryID)
+  @OneToMany(() => Item, (item) => item.cart)
   items: Item[];
 }

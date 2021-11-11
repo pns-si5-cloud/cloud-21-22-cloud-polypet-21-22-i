@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { NonDetailedProduct } from 'src/models/NonDetailedProduct';
-import { Product } from 'src/models/Product';
-import { ShoppingCartProduct } from 'src/models/ShoppingCartProduct';
+import { ProductDTO } from 'src/dto/product-dto';
+import { NonDetailedProduct } from 'src/dto/non-detailed-product-dto';
+import { Product } from 'src/models/product';
+import { ShoppingCartProduct } from 'src/dto/shopping-cart-product-dto';
 import { Between, Repository } from 'typeorm';
 
 @Injectable()
@@ -11,29 +12,18 @@ export class CatalogService {
         @InjectRepository(Product)
         private productRepository: Repository<Product>){}
         
-    public addProductToCatalog(productReq:{name:string,price:number,category:string,description:string,partnerID:string, ingredient:string,dimension:string}){
-        var addedProduct = new Product();
-        addedProduct.addedDate = new Date();//Date du jour
-        addedProduct.category = productReq.category;
-        addedProduct.description = productReq.description;
-        addedProduct.dimension = productReq.dimension;
-        addedProduct.ingredient = productReq.ingredient;
-        addedProduct.name = productReq.name;
-        addedProduct.partner_id = productReq.partnerID;
-        addedProduct.price = +productReq.price;
-
+    public addProductToCatalog(productReq:ProductDTO){
+        var addedProduct:Product = Product.createProductFromProductDTO(productReq);
         this.productRepository.save(addedProduct);
         console.log("new product added to catalog - : "+JSON.stringify(addedProduct));
     }
 
 
     public async getAllNonDetailedProducts():Promise<NonDetailedProduct[]>{
-        var productsList = await this.productRepository.find();
-
+        var productsList:Product[] = await this.productRepository.find();
         var nonDetailedProductsList:NonDetailedProduct[] = [];
 
         for(let product of productsList){
-            //TODO partner NAME !! (et pas ID)
             var ndProd = new NonDetailedProduct(product.product_id,product.name,product.description);
             nonDetailedProductsList.push(ndProd);
         }

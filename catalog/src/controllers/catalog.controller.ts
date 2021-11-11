@@ -1,4 +1,8 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { ProductDTO } from 'src/dto/product-dto';
+import { Product } from 'src/models/product';
+import { ParseNotNullPipe } from 'src/pipe/parse-not-null.pipe';
+import { ParseProductDtoPipe } from 'src/pipe/parse-product-dto.pipe';
 import { CatalogService } from 'src/services/catalog.service';
 
 @Controller('catalog')
@@ -8,7 +12,7 @@ export class CatalogController {
 
 
     @Post('add-product')
-    addProductToCatalog(@Body("product") product:{name:string,price:number,category:string,description:string,partnerID:string, ingredient:string,dimension:string}){
+    addProductToCatalog(@Body("product", ParseProductDtoPipe) product:ProductDTO){
         console.log("[addProductToCatalog]")
         this.catalogService.addProductToCatalog(product);
     }
@@ -20,19 +24,31 @@ export class CatalogController {
     }
 
     @Get('get-detailed-product')
-    getDetailedProduct(@Query('productID') productID:string){
+    async getDetailedProduct(@Query('productID',ParseNotNullPipe) productID:string){
         console.log("[getDetailedProduct]");
-        return this.catalogService.getDetailedProduct(productID);
+        var product:Product = await this.catalogService.getDetailedProduct(productID);
+        var productDTO = ProductDTO.createProductDTOFromProduct(product);
+
+        console.log("return product dto : "+JSON.stringify(productDTO));
+        return productDTO
     }
 
     @Get('get-latest-products')
-    getLatestProducts(){
+    async getLatestProducts(){
         console.log("[getLategetLatestProductsstProduct]");
-        return this.catalogService.getLatestProducts();
+        var productList:Product[] = await this.catalogService.getLatestProducts();
+        var productDTOList = []
+
+        for(let product of productList){
+            var productDTO = ProductDTO.createProductDTOFromProduct(product);
+            productDTOList.push(productDTO);
+        }
+        console.log("return product dto list : "+JSON.stringify(productDTOList));
+        return productDTOList;
     }
 
     @Get('verify-product')
-    verifyAndReturnCartProduct(@Query('productID') productID:string){
+    verifyAndReturnCartProduct(@Query('productID',ParseNotNullPipe) productID:string){
         console.log("[verifyAndReturnCartProduct]");
         return this.catalogService.verifyAndReturnCartProduct(productID);
     }

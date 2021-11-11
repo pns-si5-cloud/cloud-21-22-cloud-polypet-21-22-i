@@ -24,6 +24,7 @@ export class ShoppingCartService {
     const cart = await this.cartRepository.findOne({
       where: { cartID: cartID },
     });
+    if (cart == undefined) return undefined;
     const items = await this.itemRepository.find({
       where: { cart: cart },
     });
@@ -34,11 +35,13 @@ export class ShoppingCartService {
         item: { productID: string; quantity: number };
       }[];
     } = { cartID: cart.cartID, clientID: cart.clientID, items: [] };
-    items.forEach((item) => {
+    for (const item of items) {
       message.items.push({
         item: { productID: item.productID, quantity: item.quantity },
       });
-    });
+      await this.itemRepository.remove(item);
+    }
+    await this.cartRepository.remove(cart);
     return message;
   }
 
@@ -77,6 +80,7 @@ export class ShoppingCartService {
     const cart = await this.cartRepository.findOne({
       where: { clientID: clientID },
     });
+    if (cart == undefined) return undefined;
     return cart.cartID;
   }
 
@@ -84,6 +88,7 @@ export class ShoppingCartService {
     const cart = await this.cartRepository.findOne({
       where: { clientID: clientID },
     });
+    if (cart == undefined) return undefined;
     const items = await this.itemRepository.find({
       where: { cart: cart },
     });

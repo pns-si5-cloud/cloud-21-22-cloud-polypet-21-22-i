@@ -1,6 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { CommandStatusDTO } from 'dto/command-status-dto';
-import { Delivery } from 'models/Delivery';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { CommandStatusDTO } from 'src/dto/command-status-dto';
+import { DeliveryDateDTO } from 'src/dto/delivery-date-dto';
+import { DeliveryInfoDTO } from 'src/dto/delivery-info-dto';
+import { Delivery } from 'src/models/Delivery';
+import { ParseDeliveryDateDTOPipe } from 'src/pipe/parse-delivery-date-dto.pipe';
 import { ShippingService } from './shipping.service';
 
 @Controller('')
@@ -14,7 +17,7 @@ export class ShippingController {
     }
 
     @Get("get-command-status")
-    async getCommandStatus(@Body("deliveryID") deliveryID:string):Promise<CommandStatusDTO>{
+    async getCommandStatus(@Query("deliveryID") deliveryID:string):Promise<CommandStatusDTO>{
         console.log("[get-command-status] deliveryID:"+deliveryID);
 
         var delivery:Delivery = await this.shippingService.getDelivery(deliveryID);
@@ -23,4 +26,23 @@ export class ShippingController {
 
         return commandStatusDTO;
     }
+
+    @Post("set-delivery-date")
+    setDeliveryDate(@Body("deliveryDate",ParseDeliveryDateDTOPipe) deliveryDateDTO:DeliveryDateDTO){
+        console.log("[set-delivery-date] deliveryDateDTO:"+JSON.stringify(deliveryDateDTO));
+
+        this.shippingService.setDeliveryDate(deliveryDateDTO);
+    }
+
+    @Get("delivery-information")
+    async getDeliveryInformation(@Query("deliveryID") deliveryID:string):Promise<DeliveryInfoDTO>{
+        console.log("[delivery-information] deliveryID:"+deliveryID);
+
+        var delivery = await this.shippingService.getDelivery(deliveryID);
+        var deliveryInfoDTO = DeliveryInfoDTO.createDeliveryInfoDTOFromDelivery(delivery);
+
+        console.log("return delivery info : "+JSON.stringify(deliveryInfoDTO));
+        return deliveryInfoDTO;
+    }
+
 }

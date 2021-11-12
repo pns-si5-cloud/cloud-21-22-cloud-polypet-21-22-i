@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Delivery } from 'models/Delivery';
-import { Items } from 'models/Items';
+import { Delivery } from 'src/models/Delivery';
+import { Items } from 'src/models/Items';
 import { ShippingController } from './shipping/shipping.controller';
 import { ShippingService } from './shipping/shipping.service';
 

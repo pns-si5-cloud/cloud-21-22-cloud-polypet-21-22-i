@@ -1,0 +1,20 @@
+# openapi2-appengine.yaml
+swagger: '2.0'
+info:
+  title: API
+  description: API gateway test
+  version: 1.0.0
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /catalog/{path=**}:
+    get:
+      summary: access to catalog
+      operationId: catalog-access
+      x-google-backend:
+        address: https://si5-cloud-i.oa.r.appspot.com/
+      responses:
+        '200':
+          description: A successful response

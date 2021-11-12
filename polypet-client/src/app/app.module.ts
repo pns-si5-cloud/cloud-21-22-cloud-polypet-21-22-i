@@ -8,10 +8,12 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './components/home/home.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductListComponent } from './components/catalog/product-list/product-list.component';
 import { ProductListItemComponent } from './components/catalog/product-list-item/product-list-item.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductViewComponent } from './components/catalog/product-view/product-view.component';
 
 
 
@@ -24,6 +26,7 @@ import { ProductListItemComponent } from './components/catalog/product-list-item
     CatalogComponent,
     HomeComponent,
     ProductListItemComponent,
+    ProductViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { ProductListItemComponent } from './components/catalog/product-list-item
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

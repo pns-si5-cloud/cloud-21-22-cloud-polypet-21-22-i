@@ -2,8 +2,14 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const CATALOG_HOST = "http://catalog/"
 export const environment = {
-  production: false
+  production: false,
+  catalog_url:{
+    CATALOG_GET_ALL_PRODUCT:CATALOG_HOST+"catalog/get-all-products",
+    CATALOG_GET_PRODUCT_DETAIL:CATALOG_HOST+"catalog/get-detailed-product",
+    CATALOG_GET_LAST_PRODUCT:CATALOG_HOST+"catalog/get-latest-products",
+  }
 };
 
 /*

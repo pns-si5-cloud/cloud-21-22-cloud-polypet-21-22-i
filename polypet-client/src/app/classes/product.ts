@@ -1,5 +1,3 @@
-import { threadId } from "worker_threads";
-
 export class Product {
 
   public constructor(

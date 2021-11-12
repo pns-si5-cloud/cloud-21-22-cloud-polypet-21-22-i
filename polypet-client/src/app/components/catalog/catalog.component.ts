@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NotDetailedProduct } from 'src/app/classes/not-detailed-product';
+import { CatalogService } from 'src/app/services/catalog.service';
 
 @Component({
   selector: 'app-catalog',
@@ -7,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CatalogComponent implements OnInit {
 
-  constructor() { }
+  constructor(private catalogService:CatalogService) { }
 
+  async getAllProduct():Promise<NotDetailedProduct[]>{
+    return await this.catalogService.getAllProductNotDetails()
+  }
   ngOnInit(): void {
   }
 

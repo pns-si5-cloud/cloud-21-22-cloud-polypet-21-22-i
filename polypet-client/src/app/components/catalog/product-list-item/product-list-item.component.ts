@@ -9,7 +9,7 @@ import { NotDetailedProduct } from 'src/app/classes/not-detailed-product';
 export class ProductListItemComponent implements OnInit {
 
   @Input()
-  item!:NotDetailedProduct;
+  public item!:NotDetailedProduct;
   constructor() { }
 
   ngOnInit(): void {

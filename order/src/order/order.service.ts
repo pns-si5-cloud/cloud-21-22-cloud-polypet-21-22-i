@@ -25,40 +25,44 @@ export class OrderService {
         return shoppingCartJson
 
     }
-    public proceedToPayment(clientID:string,cartID:string,address:string,billingAddress:string){
+
+    public proceedToPayment(bankCardID:string,clientID:string,cartID:string,address:string,billingAddress:string){
         var shoppingCartJson = this.getTotalPriceFromShoppingCart(cartID)
-        this.makePayment(clientID,shoppingCartJson.totalPrice)
+        this.makePayment(bankCardID,clientID,shoppingCartJson.totalPrice)
 
         var delivery= new Delivery();
-        delivery.Address=address;
-        delivery.BillingAddress=billingAddress;
+        delivery.address=address;
+        delivery.billingAddress=billingAddress;
         delivery.ClientID=clientID;
-        var date =new Date();
-        delivery.DeliveryDate= date.toString();
-        delivery.Status = this.validation(cartID);
-        delivery.TotalPrice=shoppingCartJson.totalPrice;
+        delivery.paiementDate= new Date();;
+        delivery.status = this.validation(cartID);
+        delivery.totalPrice=shoppingCartJson.totalPrice;
+
         var lengtItems=shoppingCartJson.items.length();
         var itemsLocal=[]
         for (let pas = 0; pas < lengtItems; pas++){
             var item = new Items();
-            item.ProductID=shoppingCartJson.items[pas].productID
-            item.ProductName=shoppingCartJson.items[pas].productName
-            item.ProductPrice=shoppingCartJson.items[pas].productPrice
-            item.Quantity=shoppingCartJson.items[pas].quantity
+            item.productID=shoppingCartJson.items[pas].productID
+            item.productName=shoppingCartJson.items[pas].productName
+            item.productPrice=shoppingCartJson.items[pas].productPrice
+            item.quantity=shoppingCartJson.items[pas].quantity
             itemsLocal.push(item)
             this.ItemsRepository.save(item)
         }
         delivery.items=itemsLocal;
+
         this.DeliveryRepository.save(delivery);
+        console.log("sauvegarde dans la BDD d'une nouvelle livraison en attente de paiement :"+delivery );
     }
 
-    public makePayment(clientID:string,priceToPay:number){
-        console.log("Le client " + clientID + "souhaite payer un montant total de "+priceToPay)
+    public makePayment(bankCardID:string,clientID:string,priceToPay:number){
+        console.log("Le client " + clientID + "souhaite payer un montant total de "+priceToPay+ " avec la carte bancaire "+bankCardID);
+        //Pas de banque pour l'instant
     }
 
     public validation(cartID:string){
         console.log("La banque renvoie une validation status 'OK' vers order pour le shopping cart :"+cartID)
-        return "OK"//pas de bank pour l'instant
+        return "OK"//pas de banque pour l'instant
     }
 
 }

@@ -8,14 +8,14 @@ export class Items {
     delivery:Delivery
 
     @PrimaryColumn({name:"product_id"})
-    ProductID: number;
+    productID: number;
 
     @Column({name:"quantity"})
-    Quantity: number;
+    quantity: number;
 
     @Column({name:"product_name"})
-    ProductName: number;
+    productName: number;
 
     @Column({name:"product_price"})
-    ProductPrice: number;
+    productPrice: number;
 }

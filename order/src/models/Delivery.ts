@@ -11,24 +11,27 @@ export class Delivery {
     items: Items[];
 
     @PrimaryColumn({name:"delivery_id"})
-    DeliveryID: string;
+    deliveryID: string;
 
     @Column({name:"client_id"})
     ClientID: string;
 
     @Column({name:"address"})
-    Address: string;
+    address: string;
 
     @Column({name:"status"})
-    Status: string;
+    status: string;
     
-    @Column({name:"billingAddress"})
-    BillingAddress: string;
+    @Column({name:"billing_address"})
+    billingAddress: string;
     
-    @Column({name:"totalPrice"})
-    TotalPrice: number;
+    @Column({name:"total_price"})
+    totalPrice: number;
 
-    @Column({name:"deliveryDate"})
-    DeliveryDate: string;
+    @Column({name:"paiement_date"})
+    paiementDate: Date;
+
+    @Column({name:"delivery_date"})
+    deliveryDate: Date;
     
 }

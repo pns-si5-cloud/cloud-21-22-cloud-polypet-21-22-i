@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductDTO } from 'src/dto/product-dto';
 import { NonDetailedProduct } from 'src/dto/non-detailed-product-dto';
-import { Product } from 'src/models/product';
 import { ShoppingCartProduct } from 'src/dto/shopping-cart-product-dto';
 import { Between, Repository } from 'typeorm';
+import { Product } from 'src/models/product';
 
 @Injectable()
 export class CatalogService {

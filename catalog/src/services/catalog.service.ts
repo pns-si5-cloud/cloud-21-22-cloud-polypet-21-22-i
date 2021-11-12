@@ -15,7 +15,7 @@ export class CatalogService {
     public addProductToCatalog(productReq:ProductDTO){
         var addedProduct:Product = Product.createProductFromProductDTO(productReq);
         this.productRepository.save(addedProduct);
-        console.log("new product added to catalog - : "+JSON.stringify(addedProduct));
+        console.log("new product added to catalog : "+JSON.stringify(addedProduct));
     }
 
 
@@ -49,10 +49,12 @@ export class CatalogService {
     }
 
     public async verifyAndReturnCartProduct(productID:string):Promise<ShoppingCartProduct>{
-        var product = await this.productRepository.findOne({where:{product_id:productID}});
+        var product = await this.getDetailedProduct(productID);
         console.log("Verify product and found : "+JSON.stringify(product));
 
-        var shoppingCartProduct = new ShoppingCartProduct(product.product_id,product.name,+product.price);
+        if(!product) return undefined;
+
+        var shoppingCartProduct = new ShoppingCartProduct(product.product_id,product.name,product.price);
         console.log("Return shopping cart product : "+JSON.stringify(ShoppingCartProduct));
         return shoppingCartProduct;
     }

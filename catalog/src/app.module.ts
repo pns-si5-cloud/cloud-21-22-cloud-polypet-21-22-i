@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { HttpModule } from '@nestjs/axios';
 import { CatalogController } from './controllers/catalog.controller';
 import { CatalogService } from './services/catalog.service';
-import { Product } from './models/Product';
+import { Product } from './models/product';
 const dbSocketPath = process.env.DB_SOCKET_PATH || '/cloudsql';
 
 

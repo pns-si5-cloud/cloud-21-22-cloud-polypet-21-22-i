@@ -7,16 +7,17 @@ export class OrderController {
     }
     
     @Post('proceed-to-payment')
-    proceedToPayment(@Body('cartID') cartID:string,@Body('clientID') clientID:string,@Body('address') address:string,@Body('billingAddress')billingAddress:string) {
-        console.log("[order][proceedToPayment] cartID:string "+ cartID + "clientID:string "+clientID + " address:string "+address+" billingAddress:string "+ billingAddress);
+    proceedToPayment(@Body('bankCardID') bankCardID:string, @Body('shoppingCartID') shoppingCartID:string, @Body('clientID') clientID:string,@Body('address') address:string,@Body('billingAddress') billingAddress:string) {
+        console.log("[order][proceedToPayment] shoppingCartID:string "+ shoppingCartID + "clientID:string "+clientID + " address:string "+address+" billingAddress:string "+ billingAddress);
 
-        return this.orderService.proceedToPayment(cartID,clientID,address,billingAddress);
+        return this.orderService.proceedToPayment(bankCardID,shoppingCartID,clientID,address,billingAddress);
     }
+    
     @Post('validation')
-    validation(@Body('cartID') cartID:string) {
-        console.log("[order][validation] cartID:string "+ cartID);
+    validation(@Body('shoppingCartID') shoppingCartID:string) {
+        console.log("[order][validation] shoppingCartID:string "+ shoppingCartID);
 
-        return this.orderService.validation(cartID);
+        return this.orderService.validation(shoppingCartID);
     }
 
 }

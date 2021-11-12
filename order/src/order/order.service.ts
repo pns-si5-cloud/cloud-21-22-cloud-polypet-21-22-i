@@ -34,7 +34,7 @@ export class OrderService {
         var delivery= new Delivery();
         delivery.address=address;
         delivery.billingAddress=billingAddress;
-        delivery.ClientID=clientID;
+        delivery.clientID=clientID;
         delivery.paiementDate= new Date();;
         delivery.status = "En attente de validation de paiement";
         delivery.totalPrice=shoppingCartJson.totalPrice;
@@ -67,7 +67,7 @@ export class OrderService {
     public validation(cartID:string){
         console.log("La banque renvoie une validation status 'OK' vers order pour le shopping cart :"+cartID)
         return "OK"//pas de banque pour l'instant
-        //TODO changer le status de la commande. 
+        //TODO envoyé à shipping la confirmation de paiement
     }
 
 }

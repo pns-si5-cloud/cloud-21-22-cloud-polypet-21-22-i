@@ -4,14 +4,11 @@ import { OneToMany,PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Delivery {
 
-    @PrimaryGeneratedColumn()
-    temporaryId:number
+    @PrimaryGeneratedColumn({name:"delivery_id"})
+    deliveryID: string;
 
     @OneToMany(type => Items, items => items.delivery)
     items: Items[];
-
-    @PrimaryColumn({name:"delivery_id"})
-    deliveryID: string;
 
     @Column({name:"client_id"})
     ClientID: string;
@@ -31,7 +28,7 @@ export class Delivery {
     @Column({name:"paiement_date"})
     paiementDate: Date;
 
-    @Column({name:"delivery_date"})
+    @Column({nullable:true, name:"delivery_date"})
     deliveryDate: Date;
     
 }

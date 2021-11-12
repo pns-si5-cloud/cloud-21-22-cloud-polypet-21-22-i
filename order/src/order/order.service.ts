@@ -27,6 +27,7 @@ export class OrderService {
     }
 
     public proceedToPayment(bankCardID:string,clientID:string,cartID:string,address:string,billingAddress:string){
+        //# Fonction trop grosse, la fonction fait plus que son nom l'indique : proceed to paiement, create delivery and store...
         var shoppingCartJson = this.getTotalPriceFromShoppingCart(cartID)
         this.makePayment(bankCardID,clientID,shoppingCartJson.totalPrice)
 
@@ -35,7 +36,7 @@ export class OrderService {
         delivery.billingAddress=billingAddress;
         delivery.ClientID=clientID;
         delivery.paiementDate= new Date();;
-        delivery.status = this.validation(cartID);
+        delivery.status = "En attente de validation de paiement";
         delivery.totalPrice=shoppingCartJson.totalPrice;
 
         var lengtItems=shoppingCartJson.items.length();
@@ -53,16 +54,20 @@ export class OrderService {
 
         this.DeliveryRepository.save(delivery);
         console.log("sauvegarde dans la BDD d'une nouvelle livraison en attente de paiement :"+delivery );
+
+        return delivery.deliveryID;//# Pour que le client puisse consulter sa livraison après.
     }
 
     public makePayment(bankCardID:string,clientID:string,priceToPay:number){
         console.log("Le client " + clientID + "souhaite payer un montant total de "+priceToPay+ " avec la carte bancaire "+bankCardID);
         //Pas de banque pour l'instant
+        //TODO envoyer les infos à la banque
     }
 
     public validation(cartID:string){
         console.log("La banque renvoie une validation status 'OK' vers order pour le shopping cart :"+cartID)
         return "OK"//pas de banque pour l'instant
+        //TODO changer le status de la commande. 
     }
 
 }

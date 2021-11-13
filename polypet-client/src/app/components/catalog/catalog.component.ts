@@ -10,11 +10,16 @@ import { CatalogService } from 'src/app/services/catalog.service';
 export class CatalogComponent implements OnInit {
 
   constructor(private catalogService:CatalogService) { }
+  allProductsNotDetailed:Promise<NotDetailedProduct[]>|undefined
 
-  async getAllProduct():Promise<NotDetailedProduct[]>{
-    return await this.catalogService.getAllProductNotDetails()
-  }
   ngOnInit(): void {
+    this.allProductsNotDetailed = this.getAllProduct()
+  }
+  async getAllProduct():Promise<NotDetailedProduct[]>{
+    return this.catalogService.getAllProductNotDetails().catch((err)=>{
+      console.error(err);
+      return []
+    })
   }
 
 }

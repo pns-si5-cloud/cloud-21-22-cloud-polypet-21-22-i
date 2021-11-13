@@ -54,11 +54,9 @@ export class ShoppingCartService {
       item = await this.itemRepository.findOne({
         where: { productID: productID, cart: cart.cartID },
       });
-
       if (item != undefined) {
         item.quantity += +quantity;
         cart.totalPrice += +quantity * item.productPrice;
-        await this.itemRepository.save(item);
       } else {
         item = await this.createItem(productID, quantity);
         item.cart = cart;
@@ -113,7 +111,7 @@ export class ShoppingCartService {
     return message;
   }
 
-  private async createItem(productID: string, quantity: number) {
+  async createItem(productID: string, quantity: number) {
     const product = await firstValueFrom(
       this.http.get(this.URL_CATALOG, { params: { productID: productID } }),
     );

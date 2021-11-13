@@ -9,7 +9,7 @@ export class ProductRequest {
     @Column()
     name: string;
 
-    @Column()
+    @Column({type:"double precision"})
     price: number;
 
     @Column()

@@ -1,0 +1,7 @@
+<div class="product-list">
+  <p *ngIf="productList?.length==0">No product found</p>
+  <app-product-list-item *ngFor="let item of productList"
+  [item]="item">
+
+  </app-product-list-item>
+</div>

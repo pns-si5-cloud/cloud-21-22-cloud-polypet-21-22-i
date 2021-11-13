@@ -1,7 +1,7 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Account } from 'src/models/account';
-import { Client } from 'src/models/client';
+import { Customer } from 'src/models/customer';
 import { Employee } from 'src/models/employee';
 import { Partner } from 'src/models/partner';
 import { Repository } from 'typeorm';
@@ -10,8 +10,8 @@ import { Repository } from 'typeorm';
 export class AccountService {
 
     constructor(
-        @InjectRepository(Client)
-        private clientRepository: Repository<Client>,
+        @InjectRepository(Customer)
+        private customerRepository: Repository<Customer>,
         @InjectRepository(Employee)
         private employeeRepository: Repository<Employee>,
         @InjectRepository(Partner)
@@ -47,20 +47,20 @@ export class AccountService {
         return newEmployee.id;
     }
 
-    async registerNewClient(name: string, surname: string, address: string, mail: string, username:string, password:string): Promise<String> {
-        var newClient = new Client();
+    async registerNewCustomer(name: string, surname: string, address: string, mail: string, username:string, password:string): Promise<String> {
+        var newCustomer = new Customer();
 
-        newClient.name = name;
-        newClient.surname = surname;
-        newClient.address = address;
-        newClient.mail = mail;
+        newCustomer.name = name;
+        newCustomer.surname = surname;
+        newCustomer.address = address;
+        newCustomer.mail = mail;
 
-        await this.clientRepository.save(newClient);
-        console.log("New client (ID : " + newClient.id + ") registered in the database.");
+        await this.customerRepository.save(newCustomer);
+        console.log("New client (ID : " + newCustomer.id + ") registered in the database.");
 
-        await this.createAccount(newClient.id, username, password);
+        await this.createAccount(newCustomer.id, username, password);
 
-        return newClient.id;
+        return newCustomer.id;
     }
 
     async findUserWithUserName(username: string) {

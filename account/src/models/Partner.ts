@@ -8,6 +8,5 @@ export class Partner {
 
     @Column()
     name: string;
-
 }
 

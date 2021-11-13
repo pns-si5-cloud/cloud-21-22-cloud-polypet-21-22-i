@@ -5,9 +5,6 @@ export class Client {
 
     @PrimaryGeneratedColumn('uuid')
     id: string;
-
-    @Column()
-    username: string;
     
     @Column()
     name: string;

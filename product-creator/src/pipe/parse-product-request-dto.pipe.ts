@@ -9,7 +9,7 @@ export class ParseProductRequestDtoPipe implements PipeTransform {
     metadata: ArgumentMetadata) : ProductRequestDTO
   {
     if(!(productRequest && productRequest.name && productRequest.price && productRequest.category && productRequest.description && productRequest.partnerID && productRequest.ingredient && productRequest.dimension)){
-      throw new Error("Invalide product request DTO");
+      throw new Error("Invalide product request DTO : " + JSON.stringify(productRequest));
     }
 
     var productRequestDTO = new ProductRequestDTO(

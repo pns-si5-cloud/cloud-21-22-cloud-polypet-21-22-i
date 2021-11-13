@@ -19,7 +19,7 @@ export class ProductRequestService {
     async addNewProduct(product: ProductRequestDTO) {
 
         this.http.post(this.URL_CATALOG, {product}).subscribe({
-            next : (response)=> console.log("Send to Catalog"),
+            next : (response)=> console.log("Sent to Catalog"),
             error : (error)=> console.error(error),
         });
     }
@@ -31,7 +31,7 @@ export class ProductRequestService {
         if (productRequest) {
 
             this.http.post(this.URL_CATALOG, {product}).subscribe({
-                next : (response) => console.log("Send to catalog"),
+                next : (response) => console.log("Sent to Catalog"),
                 error : (error) => console.error(error),
             })
 

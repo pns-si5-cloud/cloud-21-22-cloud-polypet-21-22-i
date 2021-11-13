@@ -1,3 +1,4 @@
+import { ProductRequestDTO } from "src/dto/product-request-dto";
 import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
 @Entity()
@@ -9,7 +10,10 @@ export class ProductRequest {
     @Column()
     name: string;
 
-    @Column({type:"double precision"})
+    @Column({
+        type:"double precision", 
+        unsigned:true
+    })
     price: number;
 
     @Column()
@@ -27,5 +31,17 @@ export class ProductRequest {
     @Column()
     dimension: string;
 
+    public static createProductRequestFromProductRequestDTO(productRequestDTO:ProductRequestDTO) : ProductRequest{
+        var productRequest = new ProductRequest();
+        productRequest.category = productRequestDTO.category;
+        productRequest.description = productRequestDTO.description;
+        productRequest.dimension = productRequestDTO.dimension;
+        productRequest.ingredient = productRequestDTO.ingredient;
+        productRequest.name = productRequestDTO.name;
+        productRequest.partner_id = productRequestDTO.partnerID;
+        productRequest.price = productRequestDTO.price;
+
+        return productRequest;
+    }
 }
 

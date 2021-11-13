@@ -7,7 +7,7 @@ import { Product } from 'src/models/product';
 
 @Injectable()
 export class ProductRequestService {
-    private URL_CATALOG = "http://catalog:3003/catalog/add-product";
+    private URL_CATALOG = environment.catalog.URL_ADD_PRODUCT;
 
     constructor(
         @InjectRepository(ProductRequest)

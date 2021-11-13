@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { HttpService } from '@nestjs/axios';
 import { Product } from 'src/models/product';
+import { environment } from 'src/environment';
 
 @Injectable()
 export class ProductRequestService {

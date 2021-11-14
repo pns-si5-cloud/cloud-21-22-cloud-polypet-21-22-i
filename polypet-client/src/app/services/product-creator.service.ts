@@ -12,6 +12,6 @@ export class ProductCreatorService {
    }
 
   addProduct(product:Product){
-    this.http.post(environment.product_creator_url.ADD_PRODUCT,{"new-product":product}).subscribe({error:(err)=>alert("Impossible d'ajouter le produit "+product.name)})
+    this.http.post(environment.product_creator_url.ADD_PRODUCT,{"new-product":product}).subscribe({next:()=>alert("Produit ajouter"),error:(err)=>alert("Impossible d'ajouter le produit "+product.name)})
   }
 }

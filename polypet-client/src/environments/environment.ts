@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 const CATALOG_HOST = "https://catalog-dot-si5-cloud-i.oa.r.appspot.com/"
-const PRODUCT_CREATOR_HOST = "https://product-crator-dot-si5-cloud-i.oa.r.appspot.com/"
+const PRODUCT_CREATOR_HOST = "https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/"
 
 export const environment = {
   production: true,

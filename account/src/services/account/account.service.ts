@@ -74,6 +74,8 @@ export class AccountService {
         newAccount.username = username;
         newAccount.password = password;
 
+        console.log("New account (username : " + newAccount.username + ") created in the database.");
+
         await this.accountRepository.save(newAccount);
     }
 }

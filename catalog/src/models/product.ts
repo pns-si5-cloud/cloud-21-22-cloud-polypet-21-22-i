@@ -16,7 +16,7 @@ export class Product {
     @Column()
     name: string;
 
-    @Column()
+    @Column({type:"double precision"})
     price: number;
 
     @Column()

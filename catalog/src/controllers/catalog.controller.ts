@@ -13,7 +13,7 @@ export class CatalogController {
 
     @Post('add-product')
     addProductToCatalog(@Body("product", ParseProductDtoPipe) product:ProductDTO){
-        console.log("[addProductToCatalog]")
+        console.log("[addProductToCatalog] "+JSON.stringify(product))
         this.catalogService.addProductToCatalog(product);
     }
 

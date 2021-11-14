@@ -1,4 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
+import { ProductRequestDTO } from 'src/dto/product-request-dto';
+import { ParseNotNullPipe } from 'src/pipe/parse-not-null.pipe';
+import { ParseProductRequestDtoPipe } from 'src/pipe/parse-product-request-dto.pipe';
 import { ProductRequestService } from 'src/services/product-request/product-request.service';
 
 @Controller('product-request')
@@ -7,36 +10,24 @@ export class ProductRequestController {
     constructor(private productRequestService: ProductRequestService) {}
 
     @Post('add-new-product')
-    addNewProduct(@Body('name') name:string, 
-    @Body('price') price:number,
-    @Body('category') category:string,
-    @Body('description') description:string,
-    @Body('partner_id') partner_id:string,
-    @Body('ingredient') ingredient:string,
-    @Body('dimension') dimension:string) {
-        console.log("New product added by Polypet.");
+    addNewProduct(@Body("new-product", ParseProductRequestDtoPipe) productRequest:ProductRequestDTO) {
+        console.log("[addNewProduct] " + JSON.stringify(productRequest));
 
-        return this.productRequestService.addNewProduct(name, price, category, description, partner_id, ingredient, dimension);
+        return this.productRequestService.addNewProduct(productRequest);
     }
 
     @Post('validate-request')
-    validateRequest(@Body('request_id') id:number) {
-        console.log("Product number " + id + " validated by Polypet.");
+    validateRequest(@Body('request_id', ParseNotNullPipe) id:number) {
+        console.log("[validateRequest] " + id);
 
         return this.productRequestService.validateRequest(id);
     }
 
     @Post('add-new-product-request')
-    addNewProductRequest(@Body('name') name:string, 
-    @Body('price') price:number,
-    @Body('category') category:string,
-    @Body('description') description:string,
-    @Body('partner_id') partner_id:string,
-    @Body('ingredient') ingredient:string,
-    @Body('dimension') dimension:string): Promise<number> {
-        console.log("New product request.");
+    addNewProductRequest(@Body('new-product-request', ParseProductRequestDtoPipe) productRequest:ProductRequestDTO) : Promise<number> {
+        console.log("[addNewProductRequest] " + JSON.stringify(productRequest));
 
-        return this.productRequestService.addNewProductRequest(name, price, category, description, partner_id, ingredient, dimension);
+        return this.productRequestService.addNewProductRequest(productRequest);
     }
 
 }

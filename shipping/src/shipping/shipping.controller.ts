@@ -46,4 +46,13 @@ export class ShippingController {
         return deliveryInfoDTO;
     }
 
+    @Get("client-command")
+    async getClientCommand(@Query("clientID",ParseNotNullPipe) clientID:string):Promise<string[]>{
+        console.log("[client-command] clientID:"+clientID);
+
+        var commandList = await this.shippingService.getCommandListFromClientID(clientID);
+        
+        console.log("return commands ID list : "+commandList);
+        return commandList;
+    }
 }

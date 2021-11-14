@@ -8,7 +8,7 @@ export class Items {
     delivery:Delivery
 
     @PrimaryColumn({name:"product_id"})
-    productID: number;
+    productID: string;
 
     @Column({name:"quantity"})
     quantity: number;

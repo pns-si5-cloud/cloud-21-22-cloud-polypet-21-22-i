@@ -30,7 +30,7 @@ export class CatalogController {
         var productDTO = ProductDTO.createProductDTOFromProduct(product);
 
         console.log("return product dto : "+JSON.stringify(productDTO));
-        return productDTO
+        return productDTO;
     }
 
     @Get('get-latest-products')

@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { HttpService } from '@nestjs/axios';
 import { Repository } from 'typeorm';
 import { firstValueFrom } from 'rxjs';
+import { environment } from '../environment';
 
 @Injectable()
 export class ShoppingCartService {
@@ -17,7 +18,7 @@ export class ShoppingCartService {
     @InjectRepository(Item)
     private itemRepository: Repository<Item>,
   ) {
-    this.URL_CATALOG = 'http://catalog:3003/catalog/verify-product';
+    this.URL_CATALOG = environment.catalog.URL_VERIFY_PRODUCT;
   }
 
   async getShoppingCart(cartID: string) {
@@ -59,11 +60,17 @@ export class ShoppingCartService {
         cart.totalPrice += +quantity * item.productPrice;
       } else {
         item = await this.createItem(productID, quantity);
+        if (item == undefined) {
+          return false;
+        }
         item.cart = cart;
         cart.totalPrice += item.quantity * item.productPrice;
       }
     } else {
       item = await this.createItem(productID, quantity);
+      if (item == undefined) {
+        return false;
+      }
       cart = new Cart();
       cart.clientID = clientID;
       cart.totalPrice = item.quantity * item.productPrice;
@@ -72,6 +79,7 @@ export class ShoppingCartService {
     }
     await this.itemRepository.save(item);
     await this.cartRepository.save(cart);
+    return true;
   }
 
   async validateShoppingCart(clientID: string) {
@@ -112,14 +120,18 @@ export class ShoppingCartService {
   }
 
   async createItem(productID: string, quantity: number) {
-    const product = await firstValueFrom(
-      this.http.get(this.URL_CATALOG, { params: { productID: productID } }),
-    );
-    const item = new Item();
-    item.productID = productID;
-    item.quantity = +quantity;
-    item.productPrice = +product.data.productPrice;
-    item.productName = product.data.productName;
-    return item;
+    try {
+      const product = await firstValueFrom(
+        this.http.get(this.URL_CATALOG, { params: { productID: productID } }),
+      );
+      const item = new Item();
+      item.productID = productID;
+      item.quantity = +quantity;
+      item.productPrice = +product.data.productPrice;
+      item.productName = product.data.productName;
+      return item;
+    } catch (error) {
+      return undefined;
+    }
   }
 }

@@ -9,7 +9,7 @@ export class BankController {
     @Post("transaction")
     paiementConfirmation(@Body("xml",ParseNotNullPipe) xml:any,@Body('deliveryID',ParseNotNullPipe) deliveryID:string){
         console.log("[transaction] xml:"+xml+ " deliveryID:"+deliveryID);
-        this.BankService.transaction(xml,deliveryID);
+        this.BankService.tryDoTransaction(xml,deliveryID);
     }
 
     @Post("add-card")
@@ -24,10 +24,16 @@ export class BankController {
         this.BankService.getBalance(accountID);
     }
 
+    @Post("set-amount")
+    setAmount(@Body("card",ParseNotNullPipe) card:string,@Body("amount",ParseNotNullPipe) amount:string){
+        console.log("[set-amount] card :"+ card + " amount :"+amount);
+        this.BankService.setAmount(card,+amount);
+    }
+
     @Post("add-amount")
     addAmount(@Body("card",ParseNotNullPipe) card:string,@Body("amount",ParseNotNullPipe) amount:string){
         console.log("[add-amount] card :"+ card + " amount :"+amount);
-        this.BankService.setAmount(card,amount);
+        this.BankService.addAmount(card,+amount);
     }
 
 }

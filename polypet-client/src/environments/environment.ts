@@ -4,6 +4,8 @@
 
 const CATALOG_HOST = "https://catalog-dot-si5-cloud-i.oa.r.appspot.com/"
 const PRODUCT_CREATOR_HOST = "https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/"
+const COMMAND_HOST = "https://????????/"
+
 
 export const environment = {
   production: true,
@@ -14,6 +16,10 @@ export const environment = {
   },
   product_creator_url:{
     ADD_PRODUCT:PRODUCT_CREATOR_HOST+"product-request/add-new-product",
+  },
+  command_url:{
+    COMMAND_GET_ALL_COMMAND_ID:COMMAND_HOST+"client-command",
+    COMMAND_GET_COMMAND_STATUS:COMMAND_HOST+"get-command-status",
   }
 };
 

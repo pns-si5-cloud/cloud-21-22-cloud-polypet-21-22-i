@@ -17,6 +17,10 @@ import { ProductViewComponent } from './components/catalog/product-view/product-
 import { AddProductFormComponent } from './components/product-creator/add-product-form/add-product-form.component';
 import { FormsModule } from '@angular/forms';
 import { PanelEmployeeComponent } from './polypet-employee/panel-employee/panel-employee.component';
+import { CommandListComponent } from './components/command/command-list/command-list.component';
+import { CommandComponent } from './components/command/command.component';
+import { CommandListItemComponent } from './components/command/command-list-item/command-list-item.component';
+import { CommandViewComponent } from './components/command/command-view/command-view.component';
 
 
 
@@ -31,7 +35,11 @@ import { PanelEmployeeComponent } from './polypet-employee/panel-employee/panel-
     ProductListItemComponent,
     ProductViewComponent,
     AddProductFormComponent,
-    PanelEmployeeComponent
+    PanelEmployeeComponent,
+    CommandListComponent,
+    CommandComponent,
+    CommandListItemComponent,
+    CommandViewComponent
   ],
   imports: [
     BrowserModule,

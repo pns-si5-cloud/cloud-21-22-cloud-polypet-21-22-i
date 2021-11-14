@@ -1,0 +1,8 @@
+<div class="command-list">
+    <p *ngIf="commandList?.length==0">No commands founded</p>
+    <app-command-list-item *ngFor="let commandID of commandList"
+    [commandID]="commandID">
+  
+    </app-command-list-item>
+  </div>
+  

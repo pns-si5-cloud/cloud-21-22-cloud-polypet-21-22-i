@@ -19,7 +19,8 @@ export class ProductDTO {
     public static createProductDTOFromProduct(product:Product):ProductDTO{
         if(!product) return undefined;
 
-        var productDTO = new ProductDTO(product.name,
+        var productDTO = new ProductDTO(
+            product.name,
             product.price,
             product.category,
             product.description,
@@ -30,6 +31,11 @@ export class ProductDTO {
             product.addedDate);
 
         return productDTO;
+    }
+
+    public toJSON(){
+        return {name:this.name,price:this.price,category:this.category,description:this.description,
+            partnerID:this.partnerID,ingredient:this.ingredient,productID:this.productID,addedDate:this.addedDate}
     }
 
     public get dimension(): string {

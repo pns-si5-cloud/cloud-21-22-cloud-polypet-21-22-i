@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './components/auth/dashboard/dashboard.component';
+import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
+import { SignInComponent } from './components/auth/sign-in/sign-in.component';
+import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
+import { VerifyEmailComponent } from './components/auth/verify-email/verify-email.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductViewComponent } from './components/catalog/product-view/product-view.component';
 import { CommandViewComponent } from './components/command/command-view/command-view.component';
@@ -8,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AddProductFormComponent } from './components/product-creator/add-product-form/add-product-form.component';
 import { PanelEmployeeComponent } from './polypet-employee/panel-employee/panel-employee.component';
 
+
 const routes: Routes = [
   { path: 'catalog/product-details/:id', component: ProductViewComponent },
   { path: 'catalog', component: CatalogComponent },
@@ -15,6 +21,11 @@ const routes: Routes = [
   { path: 'command/command-details/:id', component: CommandViewComponent },
   { path: 'product-creator/add-product', component: AddProductFormComponent },
   { path: 'employee/product-creator', component: PanelEmployeeComponent },
+  { path: 'sign-in', component: SignInComponent },
+  { path: 'register-user', component: SignUpComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'verify-email-address', component: VerifyEmailComponent },
   { path: '', component: HomeComponent }
 ];
 

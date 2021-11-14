@@ -14,13 +14,25 @@ import { ProductListComponent } from './components/catalog/product-list/product-
 import { ProductListItemComponent } from './components/catalog/product-list-item/product-list-item.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductViewComponent } from './components/catalog/product-view/product-view.component';
-import { AddProductFormComponent } from './components/product-creator/add-product-form/add-product-form.component';
 import { FormsModule } from '@angular/forms';
-import { PanelEmployeeComponent } from './polypet-employee/panel-employee/panel-employee.component';
 import { CommandListComponent } from './components/command/command-list/command-list.component';
 import { CommandComponent } from './components/command/command.component';
 import { CommandListItemComponent } from './components/command/command-list-item/command-list-item.component';
 import { CommandViewComponent } from './components/command/command-view/command-view.component';
+import { environment } from 'src/environments/environment';
+import { AddProductFormComponent } from './components/product-creator/add-product-form/add-product-form.component';
+import { PanelEmployeeComponent } from './polypet-employee/panel-employee/panel-employee.component';
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { DashboardComponent } from './components/auth/dashboard/dashboard.component';
+import { SignInComponent } from './components/auth/sign-in/sign-in.component';
+import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './components/auth/verify-email/verify-email.component';
+import { AuthServiceComponent } from './auth/auth-service/auth-service.component';
+
+
 
 
 
@@ -39,7 +51,13 @@ import { CommandViewComponent } from './components/command/command-view/command-
     CommandListComponent,
     CommandComponent,
     CommandListItemComponent,
-    CommandViewComponent
+    CommandViewComponent,
+    DashboardComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
+    AuthServiceComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +68,11 @@ import { CommandViewComponent } from './components/command/command-view/command-
     MatButtonModule,
     FlexLayoutModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],

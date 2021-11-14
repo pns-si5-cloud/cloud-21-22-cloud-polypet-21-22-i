@@ -20,6 +20,15 @@ export const environment = {
   command_url:{
     COMMAND_GET_ALL_COMMAND_ID:COMMAND_HOST+"client-command",
     COMMAND_GET_COMMAND_STATUS:COMMAND_HOST+"get-command-status",
+  },
+  firebase: {
+    apiKey: "AIzaSyDUsoMwYzky1XLp-nBRQ6g2vBdKIb4aikE",
+    authDomain: "si5-cloud-i.firebaseapp.com",
+    projectId: "si5-cloud-i",
+    storageBucket: "si5-cloud-i.appspot.com",
+    messagingSenderId: "44599086275",
+    appId: "1:44599086275:web:ff7f527b2065796c7be676",
+    measurementId: "G-FSM2GT44X5"
   }
 };
 

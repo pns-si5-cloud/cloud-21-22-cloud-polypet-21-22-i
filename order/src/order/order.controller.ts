@@ -2,17 +2,22 @@ import { Controller ,Post,Body} from '@nestjs/common';
 import { OrderService } from './order.service';
 import { ParseNotNullPipe } from 'src/pipe/parse-not-null.pipe';
 import { Delivery } from 'src/models/Delivery';
+import { ParsePaiementInformationPipe } from 'src/pipe/parse-paiement-information.pipe';
+import { PaiementInformationDTO } from 'src/dto/paiement-information-dto';
 @Controller('order')
 export class OrderController {
     constructor(private readonly orderService: OrderService){
     }
     
     @Post('proceed-to-payment')
-    async proceedToPayment(@Body('account',ParseNotNullPipe) account:string,@Body('bankCardID',ParseNotNullPipe) bankCardID:string, @Body('shoppingCartID',ParseNotNullPipe) shoppingCartID:string, @Body('clientID',ParseNotNullPipe) clientID:string,@Body('address',ParseNotNullPipe) address:string,@Body('billingAddress',ParseNotNullPipe) billingAddress:string) {
-        console.log("[order][proceedToPayment] account:"+ account +" shoppingCartID:string "+ shoppingCartID + "clientID:string "+clientID + " address:string "+address+" billingAddress:string "+ billingAddress);
+    async proceedToPayment(@Body('paiementInformation',ParsePaiementInformationPipe) paiementInformation:PaiementInformationDTO) {
+        console.log("[order][proceedToPayment] paiementInformation:"+JSON.stringify(paiementInformation));
 
-        var delivery:Delivery = await this.orderService.createDelivery(shoppingCartID,clientID,address,billingAddress);
-        return this.orderService.makePayment(account,bankCardID,delivery.deliveryID,delivery.totalPrice);
+        var delivery:Delivery = await this.orderService.createDelivery(paiementInformation.shoppingCartID,paiementInformation.clientID,
+            paiementInformation.address,paiementInformation.billingAddress);
+
+        return this.orderService.makePayment(paiementInformation.account,paiementInformation.bankCardID,
+            delivery.deliveryID,delivery.totalPrice);
     }
     
     @Post('validation')
@@ -21,5 +26,4 @@ export class OrderController {
 
         return this.orderService.validation(status,deliveryID);
     }
-
 }

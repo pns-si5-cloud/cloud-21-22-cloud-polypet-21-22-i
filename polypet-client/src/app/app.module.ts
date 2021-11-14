@@ -14,6 +14,9 @@ import { ProductListComponent } from './components/catalog/product-list/product-
 import { ProductListItemComponent } from './components/catalog/product-list-item/product-list-item.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductViewComponent } from './components/catalog/product-view/product-view.component';
+import { AddProductFormComponent } from './components/product-creator/add-product-form/add-product-form.component';
+import { FormsModule } from '@angular/forms';
+import { PanelEmployeeComponent } from './polypet-employee/panel-employee/panel-employee.component';
 
 
 
@@ -27,6 +30,8 @@ import { ProductViewComponent } from './components/catalog/product-view/product-
     HomeComponent,
     ProductListItemComponent,
     ProductViewComponent,
+    AddProductFormComponent,
+    PanelEmployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +41,11 @@ import { ProductViewComponent } from './components/catalog/product-view/product-
     MatIconModule,
     MatButtonModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports:[AddProductFormComponent],
 })
 export class AppModule { }

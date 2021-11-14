@@ -8,11 +8,14 @@ import { Partner } from './models/partner';
 import { Employee } from './models/employee';
 import { AuthModule } from './auth/auth.module';
 import { Account } from './models/account';
+import { ConfigModule } from '@nestjs/config';
 
 const dbSocketPath = process.env.DB_SOCKET_PATH || '/cloudsql';
 
 @Module({
-  imports: [HttpModule,
+  imports: [
+    ConfigModule.forRoot(),
+    HttpModule,
     TypeOrmModule.forFeature([Customer, Partner, Employee, Account]),
     TypeOrmModule.forRoot({
       type: 'postgres',

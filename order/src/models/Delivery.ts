@@ -22,7 +22,7 @@ export class Delivery {
     @Column({name:"billing_address"})
     billingAddress: string;
     
-    @Column({name:"total_price"})
+    @Column({type:"double precision", name:"total_price"})
     totalPrice: number;
 
     @Column({name:"paiement_date"})

@@ -8,17 +8,19 @@ import { Cart } from './models/Cart';
 import { ShoppingCartService } from './services/shopping-cart.service';
 import { ShoppingCartController } from './controllers/shopping-cart.controller';
 
+const dbSocketPath = process.env.DB_SOCKET_PATH || '/cloudsql';
+
 @Module({
   imports: [
     HttpModule,
     TypeOrmModule.forFeature([Cart, Item]),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'database',
-      port: 5432,
-      username: 'SI5-CLOUD',
-      password: 'SI5-CLOUD',
-      database: 'SI5-CLOUD',
+      host: dbSocketPath+"/"+process.env.DB_HOST,
+      extra: { socketPath: dbSocketPath+"/"+process.env.DB_HOST },
+      username: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
       entities: [Cart, Item],
       synchronize: true,
     }),

@@ -12,11 +12,9 @@ import { HomeComponent } from './components/home/home.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductListComponent } from './components/catalog/product-list/product-list.component';
 import { ProductListItemComponent } from './components/catalog/product-list-item/product-list-item.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductViewComponent } from './components/catalog/product-view/product-view.component';
-import { AddProductFormComponent } from './components/product-creator/add-product-form/add-product-form.component';
 import { FormsModule } from '@angular/forms';
-import { PanelEmployeeComponent } from './polypet-employee/panel-employee/panel-employee.component';
 import { CommandListComponent } from './components/command/command-list/command-list.component';
 import { CommandComponent } from './components/command/command.component';
 import { CommandListItemComponent } from './components/command/command-list-item/command-list-item.component';
@@ -26,7 +24,13 @@ import { DeliveryListComponent } from './polypet-partner/delivery-list/delivery-
 import { DeliveryListItemComponent } from './polypet-partner/delivery-list-item/delivery-list-item.component';
 import { DeliveryViewComponent } from './polypet-partner/delivery-view/delivery-view.component';
 import { DeliveryDateFormComponent } from './polypet-partner/delivery-date-form/delivery-date-form.component';
-
+import { environment } from 'src/environments/environment';
+import { AddProductFormComponent } from './components/product-creator/add-product-form/add-product-form.component';
+import { PanelEmployeeComponent } from './polypet-employee/panel-employee/panel-employee.component';
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 
@@ -60,9 +64,15 @@ import { DeliveryDateFormComponent } from './polypet-partner/delivery-date-form/
     MatButtonModule,
     FlexLayoutModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
   exports:[AddProductFormComponent],
 })

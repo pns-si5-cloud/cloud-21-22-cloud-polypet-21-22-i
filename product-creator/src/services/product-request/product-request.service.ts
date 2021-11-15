@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { HttpService } from '@nestjs/axios';
 import { ProductRequestDTO } from 'src/dto/product-request-dto';
 import { environment } from 'src/environment';
+import { ProductRequestNonDetailed } from 'src/dto/product-request-non-detailed-dto';
 
 @Injectable()
 export class ProductRequestService {
@@ -50,5 +51,25 @@ export class ProductRequestService {
         console.log("Product saved in database under id " + productRequest.id + ".");
         
         return productRequest.id;
+    }
+
+    async retrieveAllProductRequests() : Promise<ProductRequestNonDetailed[]> {
+        var productRequests:ProductRequest[] = await this.productRequestRepository.find();
+        var productRequestsNonDetailed:ProductRequestNonDetailed[] = [];
+
+        for (let productRequest of productRequests) {
+            var productRequestND = new ProductRequestNonDetailed(productRequest.id, productRequest.name, productRequest.partner_id);
+            productRequestsNonDetailed.push(productRequestND);
+        }
+
+        console.log("All product requests (non detailed) : " + JSON.stringify(productRequestsNonDetailed));
+        return productRequestsNonDetailed;
+    }
+
+    async retrieveDetailedProductRequest(id: number) : Promise<ProductRequestDTO> {
+        var productRequest = await this.productRequestRepository.findOne(id);
+        var productRequestDTO: ProductRequestDTO = ProductRequestDTO.createProductRequestDTOFromProductRequest(productRequest);
+
+        return productRequestDTO;
     }
 }

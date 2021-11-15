@@ -1,5 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ProductRequestDTO } from 'src/dto/product-request-dto';
+import { ProductRequestNonDetailed } from 'src/dto/product-request-non-detailed-dto';
+import { ProductRequest } from 'src/models/product-request';
 import { ParseNotNullPipe } from 'src/pipe/parse-not-null.pipe';
 import { ParseProductRequestDtoPipe } from 'src/pipe/parse-product-request-dto.pipe';
 import { ProductRequestService } from 'src/services/product-request/product-request.service';
@@ -28,6 +30,20 @@ export class ProductRequestController {
         console.log("[addNewProductRequest] " + JSON.stringify(productRequest));
 
         return this.productRequestService.addNewProductRequest(productRequest);
+    }
+
+    @Get('all-product-requests')
+    retrieveAllProductRequests() : Promise<ProductRequestNonDetailed[]> {
+        console.log("[retrieveAllProductRequests]");
+
+        return this.productRequestService.retrieveAllProductRequests();
+    }
+
+    @Get('get-detailed-product-request')
+    retrieveProductRequestDetailed(@Query('productID', ParseNotNullPipe) productID:number) : Promise<ProductRequestDTO> {
+        console.log("[retrieveProductRequestDetailed] product ID : " + productID);
+
+        return this.productRequestService.retrieveDetailedProductRequest(productID);
     }
 
 }

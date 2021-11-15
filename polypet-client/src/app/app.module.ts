@@ -21,6 +21,11 @@ import { CommandListComponent } from './components/command/command-list/command-
 import { CommandComponent } from './components/command/command.component';
 import { CommandListItemComponent } from './components/command/command-list-item/command-list-item.component';
 import { CommandViewComponent } from './components/command/command-view/command-view.component';
+import { PanelPartnerComponent } from './polypet-partner/panel-partner/panel-partner.component';
+import { DeliveryListComponent } from './polypet-partner/delivery-list/delivery-list.component';
+import { DeliveryListItemComponent } from './polypet-partner/delivery-list-item/delivery-list-item.component';
+import { DeliveryViewComponent } from './polypet-partner/delivery-view/delivery-view.component';
+import { DeliveryDateFormComponent } from './polypet-partner/delivery-date-form/delivery-date-form.component';
 
 
 
@@ -39,7 +44,12 @@ import { CommandViewComponent } from './components/command/command-view/command-
     CommandListComponent,
     CommandComponent,
     CommandListItemComponent,
-    CommandViewComponent
+    CommandViewComponent,
+    PanelPartnerComponent,
+    DeliveryListComponent,
+    DeliveryListItemComponent,
+    DeliveryViewComponent,
+    DeliveryDateFormComponent
   ],
   imports: [
     BrowserModule,

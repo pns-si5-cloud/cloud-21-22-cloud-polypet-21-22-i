@@ -29,7 +29,7 @@ export class ShippingController {
     }
 
     @Post("set-delivery-date")
-    setDeliveryDate(@Body("deliveryDate",ParseDeliveryDateDTOPipe) deliveryDateDTO:DeliveryDateDTO){
+    setDeliveryDate(@Body(ParseDeliveryDateDTOPipe) deliveryDateDTO:DeliveryDateDTO){
         console.log("[set-delivery-date] deliveryDateDTO:"+JSON.stringify(deliveryDateDTO));
 
         this.shippingService.setDeliveryDate(deliveryDateDTO);

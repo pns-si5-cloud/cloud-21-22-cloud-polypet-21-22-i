@@ -20,6 +20,8 @@ export const environment = {
   command_url:{
     COMMAND_GET_ALL_COMMAND_ID:COMMAND_HOST+"client-command",
     COMMAND_GET_COMMAND_STATUS:COMMAND_HOST+"get-command-status",
+    COMMAND_GET_DELIVERY_INFO:COMMAND_HOST+"delivery-information",
+    COMMAND_SET_DELIVERY_DATE:COMMAND_HOST+"set-delivery-date",
   }
 };
 

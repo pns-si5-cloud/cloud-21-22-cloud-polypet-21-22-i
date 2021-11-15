@@ -15,7 +15,8 @@ export class PanelEmployeeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addProduct(product:Product){
+  addProduct(productSerialize:any){
+    const product = Product.fromJSON(productSerialize)
     console.log(product)
     this.productCreatorService.addProduct(product)
   }

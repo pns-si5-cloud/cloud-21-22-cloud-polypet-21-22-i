@@ -4,7 +4,6 @@ import { DashboardComponent } from './components/auth/dashboard/dashboard.compon
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
 import { SignInComponent } from './components/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
-import { VerifyEmailComponent } from './components/auth/verify-email/verify-email.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductViewComponent } from './components/catalog/product-view/product-view.component';
 import { CommandViewComponent } from './components/command/command-view/command-view.component';
@@ -12,6 +11,7 @@ import { CommandComponent } from './components/command/command.component';
 import { HomeComponent } from './components/home/home.component';
 import { AddProductFormComponent } from './components/product-creator/add-product-form/add-product-form.component';
 import { PanelEmployeeComponent } from './polypet-employee/panel-employee/panel-employee.component';
+import { AuthGuard } from './shared/guard/auth.guard';
 
 
 const routes: Routes = [
@@ -22,10 +22,10 @@ const routes: Routes = [
   { path: 'product-creator/add-product', component: AddProductFormComponent },
   { path: 'employee/product-creator', component: PanelEmployeeComponent },
   { path: 'sign-in', component: SignInComponent },
+  { path: 'sign-up', component: SignUpComponent },
   { path: 'register-user', component: SignUpComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'verify-email-address', component: VerifyEmailComponent },
   { path: '', component: HomeComponent }
 ];
 

@@ -21,6 +21,16 @@ export class Product {
     };
   }
 
+  public static fromJSON(json:any) {
+    return new this(json.name,
+      json.price,
+      json.category,
+      json.description,
+      json.partnerID,
+      json.ingredient,
+      json.dimension)
+  }
+
   public get dimension(): string {
     return this._dimension;
   }

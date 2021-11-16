@@ -1,1 +1,4 @@
 <app-delivery-list [deliveryList]="(allCommandID|async)"></app-delivery-list>
+<h1>Faire une demande de nouveau produit</h1>
+<app-add-product-request-form (doAddProductRequestPrecess)="addProductRequest($event)"></app-add-product-request-form>
+

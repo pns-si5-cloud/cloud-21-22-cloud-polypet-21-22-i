@@ -11,6 +11,7 @@ import { CommandComponent } from './components/command/command.component';
 import { HomeComponent } from './components/home/home.component';
 import { AddProductFormComponent } from './components/product-creator/add-product-form/add-product-form.component';
 import { BankPanelComponent } from './mock/bank/bank-panel/bank-panel.component';
+import { ProductRequestViewComponent } from './components/product-creator/product-request-view/product-request-view.component';
 import { PanelEmployeeComponent } from './polypet-employee/panel-employee/panel-employee.component';
 import { DeliveryViewComponent } from './polypet-partner/delivery-view/delivery-view.component';
 import { PanelPartnerComponent } from './polypet-partner/panel-partner/panel-partner.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'command', component: CommandComponent },
   { path: 'command/command-details/:id', component: CommandViewComponent },
   { path: 'product-creator/add-product', component: AddProductFormComponent },
+  { path: 'product-creator/get-detailed-product-request/:id', component: ProductRequestViewComponent},
   { path: 'employee/product-creator', component: PanelEmployeeComponent },
   { path: 'partner/delivery', component: PanelPartnerComponent },
   { path: 'partner/delivery-info/:id', component: DeliveryViewComponent },

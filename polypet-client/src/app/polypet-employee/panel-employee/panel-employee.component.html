@@ -1,1 +1,3 @@
 <app-add-product-form (doAddProductPrecess)="addProduct($event)"></app-add-product-form>
+<h1>Requêtes d'ajout de produits</h1>
+<app-product-request-list [productRequestList]="(allProductRequestNotDetailed|async)"></app-product-request-list>

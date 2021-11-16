@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/classes/product';
 import { CommandService } from 'src/app/services/command.service';
+import { ProductCreatorService } from 'src/app/services/product-creator.service';
 
 @Component({
   selector: 'app-panel-partner',
@@ -8,7 +10,7 @@ import { CommandService } from 'src/app/services/command.service';
 })
 export class PanelPartnerComponent implements OnInit {
 
-  constructor(private commandService:CommandService) { }
+  constructor(private commandService:CommandService, private productCreatorService: ProductCreatorService) { }
 
   allCommandID:Promise<string[]>|undefined
 
@@ -21,6 +23,12 @@ export class PanelPartnerComponent implements OnInit {
       console.error(err);
       return []
     })
+  }
+
+  addProductRequest(productRequestSerialize:any){
+    const productRequest = Product.fromJSON(productRequestSerialize)
+    console.log(productRequest);
+    this.productCreatorService.addProductRequest(productRequest);
   }
 
 }

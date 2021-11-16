@@ -31,6 +31,10 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { AddProductRequestFormComponent } from './components/product-creator/add-product-request-form/add-product-request-form.component';
+import { ProductRequestListComponent } from './components/product-creator/product-request-list/product-request-list.component';
+import { ProductRequestListItemComponent } from './components/product-creator/product-request-list-item/product-request-list-item.component';
+import { ProductRequestViewComponent } from './components/product-creator/product-request-view/product-request-view.component';
 import { BankPanelComponent } from './mock/bank/bank-panel/bank-panel.component';
 import { BankAddCartComponent } from './mock/bank/bank-add-cart/bank-add-cart.component';
 import { BankBalanceComponent } from './mock/bank/bank-balance/bank-balance.component';
@@ -62,6 +66,10 @@ import { BankAddAmountComponent } from './mock/bank/bank-add-amount/bank-add-amo
     BankAddCartComponent,
     BankBalanceComponent,
     BankAddAmountComponent
+    AddProductRequestFormComponent,
+    ProductRequestListComponent,
+    ProductRequestListItemComponent,
+    ProductRequestViewComponent
   ],
   imports: [
     BrowserModule,

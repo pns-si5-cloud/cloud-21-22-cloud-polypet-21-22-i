@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CustomerDTO } from 'src/dto/customer-dto';
+import { EmployeeDTO } from 'src/dto/employee-dto';
+import { PartnerDTO } from 'src/dto/partner-dto';
 import { Account } from 'src/models/account';
 import { Customer } from 'src/models/customer';
 import { Employee } from 'src/models/employee';
@@ -20,45 +23,38 @@ export class AccountService {
         private accountRepository: Repository<Account>
       ) {}
 
-    async registerNewPartner(name: string, username:string, password:string): Promise<String> {
-        var newPartner = new Partner();
-
-        newPartner.name = name;
+    async registerNewPartner(partnerDTO:PartnerDTO): Promise<String> {
+        var newPartner:Partner = Partner.createPartnerFromPartnerDTO(partnerDTO);
 
         await this.partnerRepository.save(newPartner);
         console.log("New partner (ID : " + newPartner.id + ") registered in the database.");
 
-        await this.createAccount(newPartner.id, username, password);
+        partnerDTO.id = newPartner.id;
+        await this.createAccount(partnerDTO);
 
         return newPartner.id;
     }
 
-    async registerNewEmployee(name: string, surname: string, username:string, password:string): Promise<String> {
-        var newEmployee = new Employee();
-
-        newEmployee.name = name;
-        newEmployee.surname = surname;
+    async registerNewEmployee(employeeDTO: EmployeeDTO): Promise<String> {
+        var newEmployee:Employee = Employee.createEmployeeFromEmployeeDTO(employeeDTO);
 
         await this.employeeRepository.save(newEmployee);
         console.log("New employee (ID : " + newEmployee.id + ") registered in the database.");
 
-        await this.createAccount(newEmployee.id, username, password);
+        employeeDTO.id = newEmployee.id;
+        await this.createAccount(employeeDTO);
 
         return newEmployee.id;
     }
 
-    async registerNewCustomer(name: string, surname: string, address: string, mail: string, username:string, password:string): Promise<String> {
-        var newCustomer = new Customer();
-
-        newCustomer.name = name;
-        newCustomer.surname = surname;
-        newCustomer.address = address;
-        newCustomer.mail = mail;
+    async registerNewCustomer(customerDTO: CustomerDTO): Promise<String> {
+        var newCustomer:Customer = Customer.createCustomerFromCustomerDTO(customerDTO);
 
         await this.customerRepository.save(newCustomer);
         console.log("New client (ID : " + newCustomer.id + ") registered in the database.");
 
-        await this.createAccount(newCustomer.id, username, password);
+        customerDTO.id = newCustomer.id;
+        await this.createAccount(customerDTO);
 
         return newCustomer.id;
     }
@@ -67,12 +63,8 @@ export class AccountService {
         return await this.accountRepository.findOne(username);
     }
 
-    private async createAccount(id: string, username: string, password: string) {
-        var newAccount = new Account();
-
-        newAccount.id = id;
-        newAccount.username = username;
-        newAccount.password = password;
+    private async createAccount(models:any) {
+        var newAccount:Account = Account.createAccountFromModelsDTO(models);
 
         console.log("New account (username : " + newAccount.username + ") created in the database.");
 

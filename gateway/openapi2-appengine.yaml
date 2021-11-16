@@ -1,5 +1,5 @@
 # openapi2-appengine.yaml
-swagger: '2.0'
+swagger: "2.0"
 info:
   title: API
   description: API gateway test
@@ -9,12 +9,30 @@ schemes:
 produces:
   - application/json
 paths:
-  /catalog/{path=**}:
-    get:
-      summary: access to catalog
-      operationId: catalog-access
+  /account/{paths=**}:
+    post:
+      summary: account-service
+      operationId: account-service
+      security:
+        - firebase: []
+      parameters:
+        - name: paths
+          in: path
+          description: paths
+          required: true
+          type: string
       x-google-backend:
-        address: https://si5-cloud-i.oa.r.appspot.com/
+        address: https://account-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
       responses:
-        '200':
+        "200":
           description: A successful response
+
+securityDefinitions:
+  firebase:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    x-google-issuer: "https://securetoken.google.com/si5-cloud-i"
+    x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com"
+    x-google-audiences: "si5-cloud-i"

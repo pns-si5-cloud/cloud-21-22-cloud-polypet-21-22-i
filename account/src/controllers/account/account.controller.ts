@@ -2,6 +2,12 @@ import { Body, Controller, Request, Post, UseGuards, Get } from '@nestjs/common'
 import { AuthService } from 'src/auth/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
+import { CustomerDTO } from 'src/dto/customer-dto';
+import { EmployeeDTO } from 'src/dto/employee-dto';
+import { PartnerDTO } from 'src/dto/partner-dto';
+import { ParseCustomerDtoPipe } from 'src/pipe/parse-customer-dto.pipe';
+import { ParseEmployeeDtoPipe } from 'src/pipe/parse-employee-dto.pipe';
+import { ParsePartnerDtoPipe } from 'src/pipe/parse-partner-dto.pipe';
 import { AccountService } from 'src/services/account/account.service';
 
 @Controller('account')
@@ -10,34 +16,24 @@ export class AccountController {
 
     @Post('new-customer')
     registerNewCustomer(
-    @Body('name') name:string, 
-    @Body('surname') surname:string,
-    @Body('address') address:string,
-    @Body('mail') mail:string,
-    @Body('username') username:string,
-    @Body('password') password:string): Promise<String> {
+    @Body('customer', ParseCustomerDtoPipe) customer:CustomerDTO): Promise<String> {
         console.log("[registerNewCustomer] A new client wants to register to Polypet.");
 
-        return this.accountService.registerNewCustomer(name, surname, address, mail, username, password);
+        return this.accountService.registerNewCustomer(customer);
     }
 
     @Post('new-employee')
-    registerNewEmployee(@Body('name') name:string, 
-    @Body('surname') surname:string,
-    @Body('username') username:string,
-    @Body('password') password:string): Promise<String> {
+    registerNewEmployee(@Body('employee', ParseEmployeeDtoPipe) employee:EmployeeDTO): Promise<String> {
         console.log("[registerNewEmployee] A new employee is welcomed to Polypet.");
 
-        return this.accountService.registerNewEmployee(name, surname, username, password);
+        return this.accountService.registerNewEmployee(employee);
     }
 
     @Post('new-partner')
-    registerNewPartner(@Body('name') name:string,
-    @Body('username') username:string,
-    @Body('password') password:string): Promise<String> {
+    registerNewPartner(@Body('partner', ParsePartnerDtoPipe) partner:PartnerDTO): Promise<String> {
         console.log("[registerNewPartner] A new partner wants to register to Polypet.");
 
-        return this.accountService.registerNewPartner(name, username, password);
+        return this.accountService.registerNewPartner(partner);
     }
 
     @UseGuards(LocalAuthGuard)

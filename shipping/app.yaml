@@ -1,0 +1,8 @@
+runtime: nodejs14
+service: shipping
+
+env_variables:
+  DB_HOST: si5-cloud-i:us-central1:si5-cloud
+  DB_USER: si5-cloud
+  DB_PASS: SI5-CLOUD
+  DB_NAME: SI5-CLOUD

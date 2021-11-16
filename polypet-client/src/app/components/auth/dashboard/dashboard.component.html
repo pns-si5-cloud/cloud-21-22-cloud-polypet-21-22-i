@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <nav class="col-md-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a (click)="authService.SignOut()">
+              Log out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="inner-adjust">
+
+        <div class="pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">User Profile</h1>
+        </div>
+        <!-- Show user data when logged in -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="media">
+              <div class="media-body">
+                <h1>Hello: <strong>{{(authService.userData.displayName) ? authService.userData.displayName : 'User'}}</strong></h1>
+                <p>User ID: <strong>{{authService.userData.uid}}</strong></p>
+                <p>Email: <strong>{{authService.userData.email}}</strong></p>
+                <p>Email Verified: <strong>{{authService.userData.emailVerified}}</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+</div>

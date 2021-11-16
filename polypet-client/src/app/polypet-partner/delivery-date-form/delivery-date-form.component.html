@@ -1,0 +1,9 @@
+<form (ngSubmit)="onSubmit(value)" #value="ngForm">
+    <div class="form-group">
+      <label for="deliveryDate">
+        Delivery date :
+      </label>
+      <input type="date" name ="deliveryDate" class="form-control" ngModel>
+    </div>
+    <button class="btn btn-primary" type="submit" value="Send">Send delivery date</button>
+</form>

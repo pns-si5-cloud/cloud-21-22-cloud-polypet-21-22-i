@@ -10,16 +10,17 @@ import { CatalogService } from 'src/app/services/catalog.service';
 })
 export class ProductViewComponent implements OnInit {
 
-  product!:Product
+  product:Product = new Product("Loading",0,"Loading","Loading","Loading","Loading","Loading")
   private idProduct:any
 
   constructor(private route: ActivatedRoute,
     private catalogService: CatalogService) { }
 
-  async ngOnInit(): Promise<void> {
+  async ngOnInit() {
     await this.route.params.subscribe(async params => {
       this.idProduct = params['id'];
       this.product =  await this.catalogService.getProductDetail(this.idProduct);
+      console.log(this.product)
    });
   }
 

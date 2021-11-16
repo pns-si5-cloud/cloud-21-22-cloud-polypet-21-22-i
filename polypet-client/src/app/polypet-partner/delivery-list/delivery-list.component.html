@@ -1,0 +1,7 @@
+<div class="delivery-list">
+    <p *ngIf="deliveryList?.length==0">No deliveries founded</p>
+    <app-delivery-list-item *ngFor="let commandID of deliveryList"
+    [commandID]="commandID">
+  
+    </app-delivery-list-item>
+</div>

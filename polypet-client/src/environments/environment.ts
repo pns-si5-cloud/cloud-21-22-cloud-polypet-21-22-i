@@ -4,7 +4,7 @@
 
 const CATALOG_HOST = "https://catalog-dot-si5-cloud-i.oa.r.appspot.com/"
 const PRODUCT_CREATOR_HOST = "https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/"
-const COMMAND_HOST = "https://????????/"
+const COMMAND_HOST = "https://shipping-dot-si5-cloud-i.oa.r.appspot.com/"
 
 
 export const environment = {

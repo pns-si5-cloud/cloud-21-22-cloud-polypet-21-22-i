@@ -19,15 +19,10 @@ export class BankController {
     }
 
     @Get("balance")
-    balance(@Query("accountID",ParseNotNullPipe) accountID:string){
-        console.log("[add-card] accountID :"+ accountID);
-        this.BankService.getBalance(accountID);
-    }
-
-    @Post("set-amount")
-    setAmount(@Body("card",ParseNotNullPipe) card:string,@Body("amount",ParseNotNullPipe) amount:string){
-        console.log("[set-amount] card :"+ card + " amount :"+amount);
-        this.BankService.setAmount(card,+amount);
+    balance(@Query("accountID",ParseNotNullPipe) accountID:string):string{
+        console.log("[balance] accountID :"+ accountID);
+        var xml =  this.BankService.getBalance(accountID);
+        return xml.toString();
     }
 
     @Post("add-amount")

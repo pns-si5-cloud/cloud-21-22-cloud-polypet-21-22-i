@@ -31,6 +31,10 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { BankPanelComponent } from './mock/bank/bank-panel/bank-panel.component';
+import { BankAddCartComponent } from './mock/bank/bank-add-cart/bank-add-cart.component';
+import { BankBalanceComponent } from './mock/bank/bank-balance/bank-balance.component';
+import { BankAddAmountComponent } from './mock/bank/bank-add-amount/bank-add-amount.component';
 
 
 
@@ -53,7 +57,11 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     DeliveryListComponent,
     DeliveryListItemComponent,
     DeliveryViewComponent,
-    DeliveryDateFormComponent
+    DeliveryDateFormComponent,
+    BankPanelComponent,
+    BankAddCartComponent,
+    BankBalanceComponent,
+    BankAddAmountComponent
   ],
   imports: [
     BrowserModule,

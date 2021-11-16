@@ -1,6 +1,7 @@
 const CATALOG_HOST = "https://catalog-dot-si5-cloud-i.oa.r.appspot.com/"
 const PRODUCT_CREATOR_HOST = "https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/"
 const COMMAND_HOST = "https://shipping-dot-si5-cloud-i.oa.r.appspot.com/"
+const MOCK_HOST = "https://mock-dot-si5-cloud-i.oa.r.appspot.com/"
 
 export const environment = {
   production: true,
@@ -17,6 +18,11 @@ export const environment = {
     COMMAND_GET_COMMAND_STATUS:COMMAND_HOST+"get-command-status",
     COMMAND_GET_DELIVERY_INFO:COMMAND_HOST+"delivery-information",
     COMMAND_SET_DELIVERY_DATE:COMMAND_HOST+"set-delivery-date",
+  },
+  mock:{
+    BANK_ADD_CARD:MOCK_HOST+"add-card",
+    BANK_BALANCE:MOCK_HOST+"balance",
+    BANK_ADD_AMOUNT:MOCK_HOST+"add-amount",
   },
   firebase: {
     apiKey: "AIzaSyDUsoMwYzky1XLp-nBRQ6g2vBdKIb4aikE",

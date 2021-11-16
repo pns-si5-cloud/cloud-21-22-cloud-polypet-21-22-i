@@ -14,14 +14,12 @@ export class BankService {
         
     //un compte à plusieurs cartes, chaque carte à une valeur amount qui est le solde de la carte
 
-    public setAmount(card:string,amount:number){
-        this._dictCardToAmount[card] = amount;
-    }
     public addAmount(card:string,amount:number){
         this._dictCardToAmount[card] = this._dictCardToAmount[card] + amount;
     }
     public addCard(card:string,account:string){
         this._dictCardToAccount[card] = account;
+        this._dictCardToAmount[card] = 0;
     }
     public getAllCardFromAccount(account:string){
         var totalCard=[]
@@ -47,13 +45,13 @@ export class BankService {
         return (this._dictCardToAmount[card]>=amountToPay)
     }
     
-    public getBalance(account:string){
+    public getBalance(account:string):any{
         var json = {"detailed-info":{"account":account,cards:this.getAllCardFromAccount(account)[1],totalAmount:this.getTotalAmount(account)}}
         //console.log(json)
         var xml = parser.toXml(json)
         console.log(xml)
         return xml;
-        }
+    }
     
     public tryDoTransaction(xml:any,deliveryID:string){
         var json = JSON.parse(parser.toJson(xml))

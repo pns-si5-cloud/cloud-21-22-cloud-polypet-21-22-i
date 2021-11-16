@@ -11,6 +11,10 @@ export const environment = {
   },
   product_creator_url:{
     ADD_PRODUCT:PRODUCT_CREATOR_HOST+"product-request/add-new-product",
+    ADD_PRODUCT_REQUEST:PRODUCT_CREATOR_HOST+"product-request/add-new-product-request",
+    GET_DETAILED_PRODUCT_REQUEST:PRODUCT_CREATOR_HOST+"product-request/get-detailed-product-request",
+    GET_ALL_REQUEST:PRODUCT_CREATOR_HOST+"product-request/all-product-requests",
+    VALIDATE_REQUEST:PRODUCT_CREATOR_HOST+"product-request/validate-request"
   },
   command_url:{
     COMMAND_GET_ALL_COMMAND_ID:COMMAND_HOST+"client-command",

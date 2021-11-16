@@ -31,6 +31,9 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ShoppingCartItemListComponent } from './components/shopping-cart/shopping-cart-item-list/shopping-cart-item-list.component';
+import { ShoppingCartItemListItemComponent } from './components/shopping-cart/shopping-cart-item-list-item/shopping-cart-item-list-item.component';
 
 
 
@@ -53,7 +56,10 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     DeliveryListComponent,
     DeliveryListItemComponent,
     DeliveryViewComponent,
-    DeliveryDateFormComponent
+    DeliveryDateFormComponent,
+    ShoppingCartComponent,
+    ShoppingCartItemListComponent,
+    ShoppingCartItemListItemComponent
   ],
   imports: [
     BrowserModule,

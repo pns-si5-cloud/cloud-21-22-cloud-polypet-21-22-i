@@ -5,6 +5,7 @@
 const CATALOG_HOST = "https://catalog-dot-si5-cloud-i.oa.r.appspot.com/"
 const PRODUCT_CREATOR_HOST = "https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/"
 const COMMAND_HOST = "https://????????/"
+const SHOPPING_CART_HOST = "https://catalog-dot-si5-cloud-i.oa.r.appspot.com/"
 
 
 export const environment = {
@@ -22,6 +23,12 @@ export const environment = {
     COMMAND_GET_COMMAND_STATUS:COMMAND_HOST+"get-command-status",
     COMMAND_GET_DELIVERY_INFO:COMMAND_HOST+"delivery-information",
     COMMAND_SET_DELIVERY_DATE:COMMAND_HOST+"set-delivery-date",
+  },
+  shopping_cart_url:{
+    SHOPPING_CART_GET_BY_CLIENT_ID:SHOPPING_CART_HOST+"shopping-cart",
+    SHOPPING_CART_GET_BY_CART_ID:SHOPPING_CART_HOST+"shopping-cart/cart",
+    SHOPPING_CART_VALIDATE_CART:SHOPPING_CART_HOST+"shopping-cart/validate",
+    SHOPPING_CART_ADD_PRODUCT:SHOPPING_CART_HOST+"shopping-cart/product",
   },
   firebase: {
     apiKey: "AIzaSyDUsoMwYzky1XLp-nBRQ6g2vBdKIb4aikE",

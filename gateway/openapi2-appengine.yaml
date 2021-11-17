@@ -45,7 +45,7 @@ paths:
           description: all product return success
 
   /catalog/get-latest-products: 
-    pgetost:
+    get:
       summary: get latest product in catalog
       operationId: catalog-get-latest-products
       x-google-backend:
@@ -56,7 +56,7 @@ paths:
           description: latest product return success
 
   /catalog/verify-product: 
-    pgetost:
+    get:
       summary: verify product in catalog
       operationId: catalog-verify-product
       x-google-backend:
@@ -66,6 +66,62 @@ paths:
         "200":
           description: latest product return success
 
+  /product-request/add-new-product: 
+    post:
+      summary: product creator, employee add new product
+      operationId: product-creator-add-new-product
+      x-google-backend:
+        address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: product add success
+
+  /product-request/validate-request: 
+    post:
+      summary: product creator, employee validate new product
+      operationId: product-creator-validate-new-product
+      x-google-backend:
+        address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: product validate success
+
+  /product-request/add-new-product-request: 
+    post:
+      summary: product creator, partener request to add product
+      operationId: product-creator-add-new-product-request
+      x-google-backend:
+        address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: product request success
+
+  /product-request/all-product-requests: 
+    get:
+      summary: employee request all product
+      operationId: product-creator-all-product-requests
+      x-google-backend:
+        address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: all product return success
+
+  /product-request/get-detailed-product-request: 
+    get:
+      summary: employee request detail product
+      operationId: product-creator-get-detailed-product-request
+      x-google-backend:
+        address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: get detailed product return success
+
+      
   /account/{paths=**}:
     parameters:
     - name: paths
@@ -86,7 +142,7 @@ paths:
           description: A successful response
     post:
       summary: account-service
-      operationId: account-service
+      operationId: account-service-post
       security:
         - firebase: []
       x-google-backend:
@@ -116,7 +172,7 @@ paths:
           description: A successful response
     post:
       summary: order-service
-      operationId: order-service
+      operationId: order-service-post
       security:
         - firebase: []
       x-google-backend:
@@ -146,7 +202,7 @@ paths:
           description: A successful response
     post:
       summary: shipping-service
-      operationId: shipping-service
+      operationId: shipping-service-post
       security:
         - firebase: []
       x-google-backend:
@@ -176,7 +232,7 @@ paths:
           description: A successful response
     post:
       summary: shopping-cart-service
-      operationId: shopping-cart-service
+      operationId: shopping-cart-service-post
       security:
         - firebase: []
       x-google-backend:

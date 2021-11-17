@@ -15,6 +15,6 @@ export class ShoppingCartService {
 
 
   getShoppingCartByClientID(){
-    return firstValueFrom(this.http.get<ShoppingCart>(environment.shopping_cart_url.SHOPPING_CART_GET_BY_CLIENT_ID, {params:{}}).pipe(map((data: object)=>ShoppingCart.fromJSON(data))));
+    return firstValueFrom(this.http.get<ShoppingCart>(environment.shopping_cart_url.SHOPPING_CART_GET_BY_CLIENT_ID).pipe(map((data: object)=>ShoppingCart.fromJSON(data))));
   }
 }

@@ -18,6 +18,7 @@ export class ShoppingCartController {
     @Body('productID') productID: string,
     @Body('quantity') quantity: number,
   ) {
+    console.log('clientID : ', clientID);
     if (
       !(await this.shoppingCartService.addProduct(
         clientID,
@@ -40,6 +41,7 @@ export class ShoppingCartController {
 
   @Get('cart')
   async getShoppingCartByClientID(@Query('clientID') clientID: string) {
+    console.log('clientID : ', clientID);
     const msg = await this.shoppingCartService.getShoppingCartByClientId(
       clientID,
     );

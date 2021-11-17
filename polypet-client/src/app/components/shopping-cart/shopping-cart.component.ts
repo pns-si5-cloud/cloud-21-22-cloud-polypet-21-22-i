@@ -25,6 +25,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   async getShoppingCartPrice() {
+    console.log('price :' + (await this.shoppingCart?.then((shoppingCart) => shoppingCart.totalPrice)));
     return this.shoppingCart?.then((shoppingCart) => shoppingCart.totalPrice);
   }
 

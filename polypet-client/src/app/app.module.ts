@@ -39,6 +39,9 @@ import { BankPanelComponent } from './mock/bank/bank-panel/bank-panel.component'
 import { BankAddCartComponent } from './mock/bank/bank-add-cart/bank-add-cart.component';
 import { BankBalanceComponent } from './mock/bank/bank-balance/bank-balance.component';
 import { BankAddAmountComponent } from './mock/bank/bank-add-amount/bank-add-amount.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ShoppingCartItemListComponent } from './components/shopping-cart/shopping-cart-item-list/shopping-cart-item-list.component';
+import { ShoppingCartItemListItemComponent } from './components/shopping-cart/shopping-cart-item-list-item/shopping-cart-item-list-item.component';
 
 
 
@@ -69,7 +72,10 @@ import { BankAddAmountComponent } from './mock/bank/bank-add-amount/bank-add-amo
     AddProductRequestFormComponent,
     ProductRequestListComponent,
     ProductRequestListItemComponent,
-    ProductRequestViewComponent
+    ProductRequestViewComponent,
+    ShoppingCartComponent,
+    ShoppingCartItemListComponent,
+    ShoppingCartItemListItemComponent
   ],
   imports: [
     BrowserModule,

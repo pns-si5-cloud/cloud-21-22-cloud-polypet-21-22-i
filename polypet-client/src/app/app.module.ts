@@ -65,7 +65,7 @@ import { BankAddAmountComponent } from './mock/bank/bank-add-amount/bank-add-amo
     BankPanelComponent,
     BankAddCartComponent,
     BankBalanceComponent,
-    BankAddAmountComponent
+    BankAddAmountComponent,
     AddProductRequestFormComponent,
     ProductRequestListComponent,
     ProductRequestListItemComponent,

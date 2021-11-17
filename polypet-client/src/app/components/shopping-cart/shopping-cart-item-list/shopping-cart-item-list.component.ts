@@ -8,7 +8,7 @@ import {ShoppingCartItem} from "../../../classes/shopping-cart-item";
 })
 export class ShoppingCartItemListComponent implements OnInit {
   @Input()
-  shoppingCartItemList!:ShoppingCartItem[]|null;
+  shoppingCartItemList!:ShoppingCartItem[]|undefined;
 
   constructor() { }
 

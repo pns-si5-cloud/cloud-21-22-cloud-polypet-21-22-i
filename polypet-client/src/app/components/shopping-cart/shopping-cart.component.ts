@@ -23,13 +23,4 @@ export class ShoppingCartComponent implements OnInit {
       return new ShoppingCart("","",0);
     });
   }
-
-  async getShoppingCartPrice() {
-    console.log('price :' + (await this.shoppingCart?.then((shoppingCart) => shoppingCart.totalPrice)));
-    return this.shoppingCart?.then((shoppingCart) => shoppingCart.totalPrice);
-  }
-
-  getShoppingCartItems() {
-    return this.shoppingCart?.then((shoppingCart) => shoppingCart.items);
-  }
 }

@@ -103,7 +103,12 @@ export class ShoppingCartService {
       clientID: string;
       totalPrice: number;
       items: {
-        item: { productID: string; quantity: number; price: number };
+        item: {
+          productID: string;
+          quantity: number;
+          price: number;
+          productName: string;
+        };
       }[];
     } = {
       cartID: cart.cartID,
@@ -117,6 +122,7 @@ export class ShoppingCartService {
           productID: item.productID,
           quantity: item.quantity,
           price: item.productPrice,
+          productName: item.productName,
         },
       });
     });

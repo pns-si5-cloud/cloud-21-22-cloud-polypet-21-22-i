@@ -18,7 +18,7 @@ export class ShoppingCart {
       json.clientID,
       json.totalPrice,
     )
-    json.items.forEach((item:{item: { productID: string; quantity: number; price: number }}) => cart.items.push(ShoppingCartItem.fromJSON(item)));
+    json.items.forEach((item:{item: { productID: string; quantity: number; price: number; productName: string }}) => cart.items.push(ShoppingCartItem.fromJSON(item)));
     return cart;
 
   }

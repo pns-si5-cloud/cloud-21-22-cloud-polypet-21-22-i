@@ -1,8 +1,16 @@
 export class ShoppingCartItem {
+  get productName(): string {
+    return this._productName;
+  }
+
+  set productName(value: string) {
+    this._productName = value;
+  }
   public constructor(
     private _productID: string,
     private _quantity: number,
     private _price: number,
+    private _productName: string,
   ) {}
 
   public static fromJSON(json: any) {
@@ -10,6 +18,7 @@ export class ShoppingCartItem {
       json.item.productID,
       json.item.quantity,
       json.item.price,
+      json.item.productName,
       )
   }
 

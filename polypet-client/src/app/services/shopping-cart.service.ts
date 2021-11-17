@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {firstValueFrom, map} from "rxjs";
 import {ShoppingCart} from "../classes/shopping-cart";
 import {environment} from "../../environments/environment";
-import {CommandStatus} from "../classes/command-status";
 
 @Injectable({
   providedIn: 'root'

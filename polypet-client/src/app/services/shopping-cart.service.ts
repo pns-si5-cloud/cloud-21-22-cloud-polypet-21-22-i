@@ -16,4 +16,10 @@ export class ShoppingCartService {
   getShoppingCartByClientID(){
     return firstValueFrom(this.http.get<ShoppingCart>(environment.shopping_cart_url.SHOPPING_CART_GET_BY_CLIENT_ID).pipe(map((data: object)=>ShoppingCart.fromJSON(data))));
   }
+
+  addProduct(idProduct: any, quantity: any) {
+    console.log('post :'+environment.shopping_cart_url.SHOPPING_CART_ADD_PRODUCT +' productID: ' + idProduct+ ' quantity : '+ quantity);
+    const reqBody = {productID:idProduct,quantity:quantity};
+    this.http.post(environment.shopping_cart_url.SHOPPING_CART_ADD_PRODUCT,reqBody);
+  }
 }

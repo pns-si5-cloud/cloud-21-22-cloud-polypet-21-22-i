@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/classes/product';
 import { CatalogService } from 'src/app/services/catalog.service';
+import {ShoppingCartService} from "../../../services/shopping-cart.service";
+import {NgForm} from "@angular/forms";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-product-view',
@@ -14,7 +17,9 @@ export class ProductViewComponent implements OnInit {
   private idProduct:any
 
   constructor(private route: ActivatedRoute,
-    private catalogService: CatalogService) { }
+    private catalogService: CatalogService,
+    private shoppingCartService: ShoppingCartService,
+  ) { }
 
   async ngOnInit() {
     await this.route.params.subscribe(async params => {
@@ -24,4 +29,11 @@ export class ProductViewComponent implements OnInit {
    });
   }
 
+  onSubmit(form: NgForm) {
+    console.log(form.value);
+    const fields = form.value;
+    const quantity = fields.quantity;
+    this.shoppingCartService.addProduct(this.idProduct,quantity);
+    form.resetForm();
+  }
 }

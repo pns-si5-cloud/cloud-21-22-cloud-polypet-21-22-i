@@ -18,6 +18,7 @@ export class ShoppingCartController {
     @Body('productID') productID: string,
     @Body('quantity') quantity: number,
   ) {
+    console.log('receiving product : ', productID);
     console.log('clientID : ', clientID);
     if (
       !(await this.shoppingCartService.addProduct(

@@ -19,8 +19,8 @@ export class ProductCreatorService {
 
   addProductRequest(productRequest:Product) {
     this.http.post(environment.product_creator_url.ADD_PRODUCT_REQUEST,{"new-product-request":productRequest}).subscribe({
-      next:() => alert("Requête envoyé."),
-      error:(err) => alert("Impossible d'envoyer la requête du produit " + productRequest.name)
+      next:() => alert("Request sent"),
+      error:(err) => alert("Unable to send the request of the product " + productRequest.name)
     })
   }
 
@@ -36,10 +36,10 @@ export class ProductCreatorService {
   validateRequest(request_id:number) {
     this.http.post(environment.product_creator_url.VALIDATE_REQUEST,{request_id}).subscribe({
       next:() => { 
-        alert("Requête validée.");
+        alert("Request validated");
         window.location.reload();
       },
-      error:(err) => alert("Impossible d'envoyer la validation du produit " + request_id)
+      error:(err) => alert("Unable to send the validation of the product " + request_id)
     })
   }
 }

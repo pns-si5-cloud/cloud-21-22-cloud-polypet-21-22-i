@@ -15,7 +15,7 @@ export class BankService {
     var message = {account:accountID,card:cardID}
     this.http.post<void>(environment.mock.BANK_ADD_CARD,message).subscribe({
       next:() => { alert("Card added.");},
-      error:(err) => alert("Impossible to add new card " + cardID)
+      error:(err) => alert("Unable to add new card " + cardID)
     });
   }
 
@@ -23,7 +23,7 @@ export class BankService {
     var message = {card:cardID,amount:amount}
     this.http.post<void>(environment.mock.BANK_ADD_AMOUNT,message).subscribe({
       next:() => { alert("New Amount added.");},
-      error:(err) => alert("Impossible to add new amount " + cardID)
+      error:(err) => alert("Unable to add new amount " + cardID)
     });
   }
 

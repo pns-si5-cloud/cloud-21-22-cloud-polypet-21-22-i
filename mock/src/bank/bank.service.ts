@@ -27,7 +27,7 @@ export class BankService {
         for (var card in this._dictCardToAccount){
             if (this._dictCardToAccount[card]==account){
                 totalCard.push(card)
-                totalAmount.push({card:card,amount:this._dictCardToAmount[card]})
+                totalAmount.push({cardID:card,amount:this._dictCardToAmount[card]})
                 
             }
         }
@@ -45,12 +45,11 @@ export class BankService {
         return (this._dictCardToAmount[card]>=amountToPay)
     }
     
-    public getBalance(account:string):any{
-        var json = {"detailed-info":{"account":account,cards:this.getAllCardFromAccount(account)[1],totalAmount:this.getTotalAmount(account)}}
-        //console.log(json)
-        var xml = parser.toXml(json)
-        console.log(xml)
-        return xml;
+    public getBalance(account:string):{accountID:string,cards:{cardID:string,amount:number}[],totalAmount:number}{
+        var cards:{cardID:string,amount:number}[] = this.getAllCardFromAccount(account)[1];
+        
+        var json = {accountID:account,cards:cards,totalAmount:this.getTotalAmount(account)}
+        return json;
     }
     
     public tryDoTransaction(xml:any,deliveryID:string){

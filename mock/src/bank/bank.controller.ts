@@ -19,10 +19,9 @@ export class BankController {
     }
 
     @Get("balance")
-    balance(@Query("accountID",ParseNotNullPipe) accountID:string):string{
+    balance(@Query("accountID",ParseNotNullPipe) accountID:string){
         console.log("[balance] accountID :"+ accountID);
-        var xml =  this.BankService.getBalance(accountID);
-        return xml.toString();
+        return this.BankService.getBalance(accountID);
     }
 
     @Post("add-amount")

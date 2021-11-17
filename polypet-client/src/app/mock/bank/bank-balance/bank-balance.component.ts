@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Balance } from 'src/app/classes/balance';
 import { BankService } from '../../services/bank.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { BankService } from '../../services/bank.service';
 export class BankBalanceComponent implements OnInit {
 
   constructor(private bankService:BankService) { }
-  balance:string = "_";
+  balance:Balance = new Balance("Loading",[],0);
 
   ngOnInit(): void {
   }
@@ -20,8 +21,6 @@ export class BankBalanceComponent implements OnInit {
     const fields = form.value
     const accountID = fields.accountID
 
-    console.log(this.balance)
     this.balance = await this.bankService.getBalance(accountID);
-    console.log(this.balance)
   }
 }

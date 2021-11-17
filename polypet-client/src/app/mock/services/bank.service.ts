@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
+import { Balance } from 'src/app/classes/balance';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,21 +11,24 @@ export class BankService {
 
   constructor(private http: HttpClient) { }
 
-  addCard(accountID:string,cardID:string):Promise<void>{
+  addCard(accountID:string,cardID:string){
     var message = {account:accountID,card:cardID}
-    return firstValueFrom(this.http.post<void>(environment.mock.BANK_ADD_CARD,message));
+    this.http.post<void>(environment.mock.BANK_ADD_CARD,message).subscribe({
+      next:() => { alert("Card added.");},
+      error:(err) => alert("Impossible to add new card " + cardID)
+    });
   }
 
-  addAmount(cardID:string,amount:number):Promise<void>{
+  addAmount(cardID:string,amount:number){
     var message = {card:cardID,amount:amount}
-    return firstValueFrom(this.http.post<void>(environment.mock.BANK_ADD_AMOUNT,message));
+    this.http.post<void>(environment.mock.BANK_ADD_AMOUNT,message).subscribe({
+      next:() => { alert("New Amount added.");},
+      error:(err) => alert("Impossible to add new amount " + cardID)
+    });
   }
 
-  async getBalance(accountID:string): Promise<string>{
-    this.http.get<string>(environment.mock.BANK_BALANCE,{params:{accountID:accountID}}).subscribe({
-        next:(response)=> console.log(response),
-        error:(error)=> console.log(error),
-      });
-      return "coucou"
+  async getBalance(accountID:string): Promise<Balance>{
+    return firstValueFrom(this.http.get<Balance>(environment.mock.BANK_BALANCE,{params:{accountID:accountID}})
+      .pipe(map((data: object)=>Balance.fromJSON(data))));
   }
 }

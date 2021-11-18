@@ -1,3 +1,4 @@
+<div class="marge">
 <div class="displayTable">
   <div class="displayTableCell">
 
@@ -10,12 +11,14 @@
       <div class="formGroup">
         <input type="password" class="formControl" placeholder="Password" #userPassword required>
       </div>
+      <br>
 
       <!-- Calling SignIn Api from AuthService -->
       <div class="formGroup">
         <input type="button" class="btn btnPrimary" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">
       </div>
 
+      <br>
       <div class="formGroup">
         <span class="or"><span class="orInner">Or</span></span>
       </div>
@@ -38,4 +41,5 @@
     </div>
 
   </div>
+</div>
 </div>

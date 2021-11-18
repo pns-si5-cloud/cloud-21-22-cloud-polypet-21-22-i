@@ -1,4 +1,4 @@
-<h2>{{product.name}}</h2>
+<div class="marge"><h2>{{product.name}}</h2>
 <p>Price : {{product.price}}€</p>
 <p>Category : {{product.category}}</p>
 <p>Description : {{product.description}}</p>
@@ -8,9 +8,9 @@
 <form (ngSubmit)="onSubmit(value)" #value="ngForm">
   <div class="form-group">
     <label for="quantity">
-      Product quantity :
+      Product quantity
     </label>
     <input type="text" name ="quantity" class="form-control" ngModel>
   </div>
   <button class="btn btn-primary" type="submit" value="Send">Add object(s) to shopping cart</button>
-</form>
+</form></div>

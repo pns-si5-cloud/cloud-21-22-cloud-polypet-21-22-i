@@ -1,3 +1,4 @@
+<div class="marge">
 <div class="displayTable">
   <div class="displayTableCell">
 
@@ -11,10 +12,12 @@
       <div class="formGroup">
         <input type="password" class="formControl" placeholder="Password" #userPwd required>
       </div>
+      <br>
 
       <div class="formGroup">
         <input type="button" class="btn btnPrimary" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value)">
       </div>
+      <br>
 
       <div class="formGroup">
         <span class="or"><span class="orInner">Or</span></span>
@@ -33,4 +36,5 @@
     </div>
   </div>
 
+</div>
 </div>

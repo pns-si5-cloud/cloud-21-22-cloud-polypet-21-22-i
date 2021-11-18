@@ -42,4 +42,14 @@ export class ProductCreatorService {
       error:(err) => alert("Unable to send the validation of the product " + request_id)
     })
   }
+
+  deleteRequest(request_id:number) {
+    this.http.post(environment.product_creator_url.DELETE_REQUEST,{request_id}).subscribe({
+      next:() => { 
+        alert("Request deleted");
+        window.location.reload();
+      },
+      error:(err) => alert("Unable to send the deletion of the product " + request_id)
+    })
+  }
 }

@@ -15,7 +15,8 @@ export const environment = {
     ADD_PRODUCT_REQUEST:PRODUCT_CREATOR_HOST+"product-request/add-new-product-request",
     GET_DETAILED_PRODUCT_REQUEST:PRODUCT_CREATOR_HOST+"product-request/get-detailed-product-request",
     GET_ALL_REQUEST:PRODUCT_CREATOR_HOST+"product-request/all-product-requests",
-    VALIDATE_REQUEST:PRODUCT_CREATOR_HOST+"product-request/validate-request"
+    VALIDATE_REQUEST:PRODUCT_CREATOR_HOST+"product-request/validate-request",
+    DELETE_REQUEST:PRODUCT_CREATOR_HOST+"product-request/delete-product-request"
   },
   command_url:{
     COMMAND_GET_ALL_COMMAND_ID:COMMAND_HOST+"client-command",

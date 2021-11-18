@@ -46,4 +46,11 @@ export class ProductRequestController {
         return this.productRequestService.retrieveDetailedProductRequest(productID);
     }
 
+    @Post('delete-product-request')
+    deleteProductRequest(@Body('request_id', ParseNotNullPipe) id:number) {
+        console.log("[deleteProductRequest] " + id);
+
+        return this.productRequestService.deleteProductRequest(id);
+    }
+
 }

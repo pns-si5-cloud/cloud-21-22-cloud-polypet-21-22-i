@@ -10,10 +10,11 @@ export class OrderController {
     }
     
     @Post('proceed-to-payment')
-    async proceedToPayment(@Body('paiementInformation',ParsePaiementInformationPipe) paiementInformation:PaiementInformationDTO) {
-        console.log("[order][proceedToPayment] paiementInformation:"+JSON.stringify(paiementInformation));
+    async proceedToPayment(@Body('clientID',ParseNotNullPipe) clientID,
+        @Body('paiementInformation',ParsePaiementInformationPipe) paiementInformation:PaiementInformationDTO) {
+        console.log("[order][proceedToPayment] clientID :"+clientID +" paiementInformation:"+JSON.stringify(paiementInformation));
 
-        var delivery:Delivery = await this.orderService.createDelivery(paiementInformation.shoppingCartID,paiementInformation.clientID,
+        var delivery:Delivery = await this.orderService.createDelivery(paiementInformation.shoppingCartID,clientID,
             paiementInformation.address,paiementInformation.billingAddress);
 
         return this.orderService.makePayment(paiementInformation.account,paiementInformation.bankCardID,

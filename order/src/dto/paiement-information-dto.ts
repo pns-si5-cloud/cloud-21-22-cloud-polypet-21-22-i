@@ -3,7 +3,6 @@ export class PaiementInformationDTO {
     private _bankCardID: string; 
     private _address: string;
     private _shoppingCartID: string;
-    private _clientID: string;
     private _billingAddress: string;
 
     public constructor(
@@ -11,14 +10,12 @@ export class PaiementInformationDTO {
         bankCardID:string,
         address:string,
         shoppingCartID:string,
-        clientID:string,
         billingAddress:string){
         
             this._account = account;
             this._bankCardID = bankCardID;
             this._address = address;
             this._shoppingCartID = shoppingCartID;
-            this._clientID = clientID;
             this._billingAddress = billingAddress;
     }
 
@@ -27,12 +24,6 @@ export class PaiementInformationDTO {
     }
     public set shoppingCartID(value: string) {
         this._shoppingCartID = value;
-    }
-    public get clientID(): string {
-        return this._clientID;
-    }
-    public set clientID(value: string) {
-        this._clientID = value;
     }
     public get address(): string {
         return this._address;

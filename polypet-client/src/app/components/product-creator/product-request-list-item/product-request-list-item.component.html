@@ -1,9 +1,11 @@
 <div>
-    <p>{{item.productRequestID}}</p>
+    <p class="title">Product request number {{item.productRequestID}}</p>
     <p>{{item.productName}}</p>
     <p>{{item.partnerID}}</p>
-    <button mat-button color="primary" routerLink="/product-creator/get-detailed-product-request/{{item.productRequestID}}">Preview</button>
-    <button mat-button color="primary" (click)="validateRequest(item.productRequestID)">Validate</button>
-    <button mat-button color="primary" (click)="deleteRequest(item.productRequestID)">Delete</button>
+    <p class="center">
+    <button mat-button routerLink="/product-creator/get-detailed-product-request/{{item.productRequestID}}">Preview</button>
+    <button mat-button (click)="validateRequest(item.productRequestID)">Validate</button>
+    <button mat-button (click)="deleteRequest(item.productRequestID)">Delete</button>
+    </p>
   </div>
   

@@ -1,5 +1,7 @@
 <div>
-  <p>{{item.productName}}</p>
+  <p class="title">{{item.productName}}</p>
   <p>{{item.productDescription}}</p>
-  <button mat-button color="primary" routerLink="/catalog/product-details/{{item.productID}}">Preview</button>
+  <p class="center">
+  <button mat-button routerLink="/catalog/product-details/{{item.productID}}">Preview</button>
+</p>
 </div>

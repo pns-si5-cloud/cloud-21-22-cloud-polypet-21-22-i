@@ -1,74 +1,87 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { environment } from 'src/environment';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Card } from 'src/models/Card';
 var parser = require('xml2json');
 
 @Injectable()
 export class BankService {
     constructor(
-        private http:HttpService){
+        private http:HttpService,
+        @InjectRepository(Card)
+        private cardRepository: Repository<Card>){
         }
 
     private URL_ORDER = environment.order.URL_VALIDATION_ORDER;
-    private _dictCardToAmount = {};
-    private _dictCardToAccount = {};
         
     //un compte à plusieurs cartes, chaque carte à une valeur amount qui est le solde de la carte
 
-    public addAmount(card:string,amount:number){
-        this._dictCardToAmount[card] = this._dictCardToAmount[card] + amount;
+    public async addAmount(cardID:string,amount:number){
+        var card = await this.cardRepository.findOne({where:{cardID:cardID}});
+        
+        card.amount += amount;
+        this.cardRepository.save(card);
+        console.log("add amount "+amount+" to card in DB:"+JSON.stringify(card));
+
+        return card.amount;
     }
-    public addCard(card:string,account:string){
-        this._dictCardToAccount[card] = account;
-        this._dictCardToAmount[card] = 0;
+    public addCard(cardID:string,account:string){
+        var card = new Card();
+        card.cardID = cardID;
+        card.account = account;
+        card.amount = 0;
+
+        this.cardRepository.save(card);
+        console.log("save new card in DB:"+JSON.stringify(card));
     }
-    public getAllCardFromAccount(account:string){
-        var totalCard=[]
+    public async getAllCardFromAccount(account:string):Promise<{ cardID: string; amount: number; }[]>{
+        var cardList = await this.cardRepository.find({where:{account:account}});
+
         var totalAmount=[]
-        for (var card in this._dictCardToAccount){
-            if (this._dictCardToAccount[card]==account){
-                totalCard.push(card)
-                totalAmount.push({cardID:card,amount:this._dictCardToAmount[card]})
-                
-            }
+        for (var card of cardList){
+            totalAmount.push({cardID:card.cardID,amount:card.amount})
         }
-        return [totalCard,totalAmount]
+        return totalAmount
     }
-    public getTotalAmount(account:string){
-        var totalCard=this.getAllCardFromAccount(account)[1]
-        var TotalAmount=0
-        for (let pas = 0 ; pas<totalCard.length ;pas++){
-                TotalAmount= TotalAmount+totalCard[pas].amount
-            }
-        return TotalAmount;
+    public async getTotalAmount(account:string):Promise<number>{
+        var totalCard:{cardID:string,amount:number}[]= await this.getAllCardFromAccount(account);
+
+        var totalAmount=0
+        for (let el of totalCard){
+            totalAmount= totalAmount + el.amount
+        }
+        return totalAmount;
     }
-    public checkIfCanPay(card,amountToPay){
-        return (this._dictCardToAmount[card]>=amountToPay)
+    public async checkIfCanPay(cardID,amountToPay){
+        var card = await this.cardRepository.findOne({where:{cardID:cardID}});
+
+        return (card.amount>=amountToPay)
     }
     
-    public getBalance(account:string):{accountID:string,cards:{cardID:string,amount:number}[],totalAmount:number}{
-        var cards:{cardID:string,amount:number}[] = this.getAllCardFromAccount(account)[1];
+    public async getBalance(account:string):Promise<{ accountID: string; cards: { cardID: string; amount: number; }[]; totalAmount: number; }>{
+        var cards:{cardID:string,amount:number}[] = await this.getAllCardFromAccount(account)[1];
         
-        var json = {accountID:account,cards:cards,totalAmount:this.getTotalAmount(account)}
+        var json = {accountID:account,cards:cards,totalAmount:await this.getTotalAmount(account)}
         return json;
     }
     
-    public tryDoTransaction(xml:any,deliveryID:string){
+    public async tryDoTransaction(xml:any,deliveryID:string){
         var json = JSON.parse(parser.toJson(xml))
         var totalToPay = +json["Transaction"]["amount"]
         var account = json["Transaction"]["account"]
-        var card = json["Transaction"]["card"]
+        var cardID = json["Transaction"]["card"]
 
         var status;
-        if (this.checkIfCanPay(card,totalToPay)){
-            this.addAmount(card,-totalToPay)
+        if (await this.checkIfCanPay(cardID,totalToPay)){
             status = "Paiement accepté"
-            console.log("[tryDotransaction] The account "+ account + "can pay this amount :"+totalToPay+" amount is now :"+this._dictCardToAmount[card])
+            console.log("[tryDotransaction] The account "+ account + "can pay this amount :"+totalToPay)
 
         }
         else {
             status = "Paiement refusé"
-            console.log("[tryDotransaction] The account "+ account + "can't pay this amount :"+totalToPay+" because his current account amount is "+this._dictCardToAmount[card])
+            console.log("[tryDotransaction] The account "+ account + "can't pay this amount :"+totalToPay)
         }
 
         var message = {status:status,deliveryID:deliveryID};

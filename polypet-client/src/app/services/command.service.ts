@@ -17,12 +17,12 @@ export class CommandService {
   }
 
   getCommand(commandID:string):Promise<CommandStatus>{
-    return firstValueFrom(this.http.get<CommandStatus>(environment.command_url.COMMAND_GET_COMMAND_STATUS,{params:{commandID}})
+    return firstValueFrom(this.http.get<CommandStatus>(environment.command_url.COMMAND_GET_COMMAND_STATUS,{params:{deliveryID:commandID}})
       .pipe(map((data: object)=>CommandStatus.fromJSON(data))));
   }
 
   getDeliveryInfo(commandID:string):Promise<DeliveryInfo>{
-    return firstValueFrom(this.http.get<DeliveryInfo>(environment.command_url.COMMAND_GET_DELIVERY_INFO,{params:{commandID}})
+    return firstValueFrom(this.http.get<DeliveryInfo>(environment.command_url.COMMAND_GET_DELIVERY_INFO,{params:{deliveryID:commandID}})
       .pipe(map((data: object)=>DeliveryInfo.fromJSON(data))));
   }
 

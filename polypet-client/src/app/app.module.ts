@@ -42,6 +42,7 @@ import { BankAddAmountComponent } from './mock/bank/bank-add-amount/bank-add-amo
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ShoppingCartItemListComponent } from './components/shopping-cart/shopping-cart-item-list/shopping-cart-item-list.component';
 import { ShoppingCartItemListItemComponent } from './components/shopping-cart/shopping-cart-item-list-item/shopping-cart-item-list-item.component';
+import { PaymentPanelComponent } from './order/payment/payment-panel/payment-panel.component';
 
 
 
@@ -75,7 +76,8 @@ import { ShoppingCartItemListItemComponent } from './components/shopping-cart/sh
     ProductRequestViewComponent,
     ShoppingCartComponent,
     ShoppingCartItemListComponent,
-    ShoppingCartItemListItemComponent
+    ShoppingCartItemListItemComponent,
+    PaymentPanelComponent
   ],
   imports: [
     BrowserModule,

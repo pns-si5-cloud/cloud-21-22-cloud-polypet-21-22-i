@@ -20,4 +20,8 @@ export class ProductRequestListItemComponent implements OnInit {
     this.productCreatorService.validateRequest(request_id);
   }
 
+  deleteRequest(request_id:number) {
+    this.productCreatorService.deleteRequest(request_id);
+  }
+
 }

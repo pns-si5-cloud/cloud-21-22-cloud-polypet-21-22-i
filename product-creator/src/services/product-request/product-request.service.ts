@@ -72,4 +72,11 @@ export class ProductRequestService {
 
         return productRequestDTO;
     }
+
+    async deleteProductRequest(id: number) {
+        var productRequest = await this.productRequestRepository.findOne(id);
+        await this.productRequestRepository.remove(productRequest);
+
+        console.log("Product request deleted");
+    }
 }

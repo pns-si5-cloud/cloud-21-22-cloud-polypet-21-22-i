@@ -20,6 +20,9 @@ export class ShoppingCartService {
   addProduct(idProduct: any, quantity: any) {
     console.log('post :'+environment.shopping_cart_url.SHOPPING_CART_ADD_PRODUCT +' productID: ' + idProduct+ ' quantity : '+ quantity);
     const reqBody = {productID:idProduct,quantity:quantity};
-    this.http.post(environment.shopping_cart_url.SHOPPING_CART_ADD_PRODUCT,reqBody);
+    this.http.post(environment.shopping_cart_url.SHOPPING_CART_ADD_PRODUCT,reqBody).subscribe({
+      next:() => alert("Request sent"),
+      error:(err) => alert("Unable to send the request of the paymentInformation " + JSON.stringify(reqBody) )
+    });
   }
 }

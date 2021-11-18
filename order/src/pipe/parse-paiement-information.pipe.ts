@@ -11,7 +11,7 @@ export class ParsePaiementInformationPipe implements PipeTransform {
       clientID:string,
       billingAddress:string}, 
     metadata: ArgumentMetadata) {
-      console.log(paiementInformation)
+    console.log(paiementInfo)
     if(!(paiementInfo && paiementInfo.account && paiementInfo.bankCardID && paiementInfo.address && paiementInfo.shoppingCartID && paiementInfo.clientID && paiementInfo.billingAddress)){
       throw new Error("Invalid Paiement Information");
     }

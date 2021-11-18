@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
+import { environment } from 'src/environment';
 var parser = require('xml2json');
 
 @Injectable()
@@ -8,20 +9,18 @@ export class BankService {
         private http:HttpService){
         }
 
-    private URL_ORDER = "http://order:3003/order/validation"
+    private URL_ORDER = environment.order.URL_VALIDATION_ORDER;
     private _dictCardToAmount = {};
     private _dictCardToAccount = {};
         
     //un compte à plusieurs cartes, chaque carte à une valeur amount qui est le solde de la carte
 
-    public setAmount(card:string,amount:number){
-        this._dictCardToAmount[card] = amount;
-    }
     public addAmount(card:string,amount:number){
         this._dictCardToAmount[card] = this._dictCardToAmount[card] + amount;
     }
     public addCard(card:string,account:string){
         this._dictCardToAccount[card] = account;
+        this._dictCardToAmount[card] = 0;
     }
     public getAllCardFromAccount(account:string){
         var totalCard=[]
@@ -29,7 +28,7 @@ export class BankService {
         for (var card in this._dictCardToAccount){
             if (this._dictCardToAccount[card]==account){
                 totalCard.push(card)
-                totalAmount.push({card:card,amount:this._dictCardToAmount[card]})
+                totalAmount.push({cardID:card,amount:this._dictCardToAmount[card]})
                 
             }
         }
@@ -47,13 +46,12 @@ export class BankService {
         return (this._dictCardToAmount[card]>=amountToPay)
     }
     
-    public getBalance(account:string){
-        var json = {"detailed-info":{"account":account,cards:this.getAllCardFromAccount(account)[1],totalAmount:this.getTotalAmount(account)}}
-        //console.log(json)
-        var xml = parser.toXml(json)
-        console.log(xml)
-        return xml;
-        }
+    public getBalance(account:string):{accountID:string,cards:{cardID:string,amount:number}[],totalAmount:number}{
+        var cards:{cardID:string,amount:number}[] = this.getAllCardFromAccount(account)[1];
+        
+        var json = {accountID:account,cards:cards,totalAmount:this.getTotalAmount(account)}
+        return json;
+    }
     
     public tryDoTransaction(xml:any,deliveryID:string){
         var json = JSON.parse(parser.toJson(xml))

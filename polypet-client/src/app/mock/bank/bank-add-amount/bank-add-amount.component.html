@@ -1,0 +1,15 @@
+<form (ngSubmit)="onSubmit(value)" #value="ngForm">
+    <div class="form-group">
+        <label for="cardID">
+            Card ID :
+        </label>
+        <input type="text" name ="cardID" class="form-control" ngModel>
+    </div>
+    <div class="form-group">
+        <label for="amount">
+            Amount :
+        </label>
+        <input type="number" name ="amount" class="form-control" ngModel>
+    </div>
+    <button class="btn btn-primary" type="submit" value="Send">Add amount to card</button>
+</form>

@@ -23,7 +23,6 @@ export class AuthService {
     this.afAuth.authState.subscribe(async user => {
       if (user) {
         this.userData = user;
-        console.log(this.userData)
         localStorage.setItem('user', JSON.stringify(this.userData));
         var tokenUser = await firebase.auth().currentUser?.getIdToken()
         if(tokenUser){
@@ -130,10 +129,7 @@ export class AuthService {
     }
 
     getToken():string|null{
-      console.log("----------------ddddddddddddd----------------------")
-
       firebase.auth().currentUser?.getIdToken()
-      console.log("--------------------------------------")
       return localStorage.getItem("token")
     }
 

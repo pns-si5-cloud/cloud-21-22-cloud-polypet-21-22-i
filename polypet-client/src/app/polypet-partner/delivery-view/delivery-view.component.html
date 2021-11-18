@@ -1,13 +1,13 @@
-<h2>Delivery Informations for command : {{commandID}}</h2>
+<h2>Delivery information for order : {{commandID}}</h2>
 <p>Address : {{deliveryInfo.address}}</p>
 <p>Total price : {{deliveryInfo.totalPrice}}</p>
-<p>Paiement date : {{deliveryInfo.paiementDate}}</p>
-<ol>
+<p>Payment date : {{deliveryInfo.paiementDate}}</p>
+<ul>
     <li *ngFor="let commandItem of deliveryInfo.items">
         <p>Product name : {{commandItem.name}}</p>
         <p>Quantity : {{commandItem.quantity}}</p>
         <p>Unitary price : {{commandItem.unitaryPrice}}</p>
     </li>
-</ol>
+</ul>
 
 <app-delivery-date-form (setDeliveryDateProcess)="setDeliveryDate($event)"></app-delivery-date-form>

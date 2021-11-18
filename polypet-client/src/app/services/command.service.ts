@@ -30,8 +30,8 @@ export class CommandService {
     var message = {deliveryID:commandID,deliveryDate:deliveryDate }
     this.http.post(environment.command_url.COMMAND_SET_DELIVERY_DATE,message)
       .subscribe({
-        next:()=>alert("Delivery date sended"),
-        error:(err)=>alert("Impossible to send the delivery date "+deliveryDate)
+        next:()=>alert("Delivery date sent"),
+        error:(err)=>alert("Unable to send the delivery date "+deliveryDate)
       })
   }
 }

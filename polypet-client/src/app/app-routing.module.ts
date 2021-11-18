@@ -10,17 +10,23 @@ import { CommandViewComponent } from './components/command/command-view/command-
 import { CommandComponent } from './components/command/command.component';
 import { HomeComponent } from './components/home/home.component';
 import { AddProductFormComponent } from './components/product-creator/add-product-form/add-product-form.component';
+import { BankPanelComponent } from './mock/bank/bank-panel/bank-panel.component';
+import { ProductRequestViewComponent } from './components/product-creator/product-request-view/product-request-view.component';
 import { PanelEmployeeComponent } from './polypet-employee/panel-employee/panel-employee.component';
 import { DeliveryViewComponent } from './polypet-partner/delivery-view/delivery-view.component';
 import { PanelPartnerComponent } from './polypet-partner/panel-partner/panel-partner.component';
 import { AuthGuard } from './shared/guard/auth.guard';
+import {ShoppingCartComponent} from "./components/shopping-cart/shopping-cart.component";
+import { PaymentPanelComponent } from './order/payment/payment-panel/payment-panel.component';
 
 const routes: Routes = [
   { path: 'catalog/product-details/:id', component: ProductViewComponent },
   { path: 'catalog', component: CatalogComponent },
+  { path: 'bank', component: BankPanelComponent },
   { path: 'command', component: CommandComponent },
   { path: 'command/command-details/:id', component: CommandViewComponent },
   { path: 'product-creator/add-product', component: AddProductFormComponent },
+  { path: 'product-creator/get-detailed-product-request/:id', component: ProductRequestViewComponent},
   { path: 'employee/product-creator', component: PanelEmployeeComponent },
   { path: 'partner/delivery', component: PanelPartnerComponent },
   { path: 'partner/delivery-info/:id', component: DeliveryViewComponent },
@@ -29,6 +35,8 @@ const routes: Routes = [
   { path: 'register-user', component: SignUpComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'shopping-cart', component: ShoppingCartComponent },
+  { path: 'order',component:PaymentPanelComponent},
   { path: '', component: HomeComponent }
 ];
 

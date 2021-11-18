@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
+import { environment } from 'src/environment';
 var parser = require('xml2json');
 
 @Injectable()
@@ -8,7 +9,7 @@ export class BankService {
         private http:HttpService){
         }
 
-    private URL_ORDER = "http://order:3003/order/validation"
+    private URL_ORDER = environment.order.URL_VALIDATION_ORDER;
     private _dictCardToAmount = {};
     private _dictCardToAccount = {};
         

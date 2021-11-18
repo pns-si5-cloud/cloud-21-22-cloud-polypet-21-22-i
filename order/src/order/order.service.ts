@@ -8,14 +8,15 @@ import { Delivery } from 'src/models/Delivery';
 import { ShoppingCartInfoDTO } from 'src/dto/shopping-cart-info-dto';
 import { ShoppingCartItemDTO } from 'src/dto/shopping-cart-item-dto';
 import { ProductInfoDTO } from 'src/dto/product-info-dto';
+import { environment } from 'src/environment';
 var parser = require('xml2json');
 
 @Injectable()
 export class OrderService {
-    private URL_SHOPPING_CART = "http://shopping-cart:3001/shopping-cart"
-    private URL_PRODUCT_DETAILED = "http://catalog:3003/get-detailed-product"
-    private URL_SHIPPING = "http://shipping:3007/paiement-confirmation"
-    private URL_BANK = "http://mock:2999/transaction"
+    private URL_SHOPPING_CART = environment.shopping_cart.URL_SHOPPING_CART_SHOPPING_CART
+    private URL_PRODUCT_DETAILED = environment.catalog.URL_GET_DETAILED_PRODUCT_CATALOG
+    private URL_SHIPPING = environment.shipping.URL_PAIEMENT_CONFIRMATION_SHIPPING
+    private URL_BANK = environment.mock.URL_TRANSACTION_MOCK
 
     constructor(           
         @InjectRepository(Items)

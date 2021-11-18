@@ -1,6 +1,8 @@
-<div><h1>Add a product</h1>
-<app-add-product-form (doAddProductPrecess)="addProduct($event)"></app-add-product-form>
-<br>
+<div>
 <h1>Product requests list</h1>
 <app-product-request-list [productRequestList]="(allProductRequestNotDetailed|async)"></app-product-request-list>
+<br>
+<h1>Add a product</h1>
+<app-add-product-form (doAddProductPrecess)="addProduct($event)"></app-add-product-form>
+<br>
 </div>

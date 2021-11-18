@@ -7,14 +7,14 @@ export class PaiementInformationDTO {
     private _billingAddress: string;
 
     public constructor(
-        acount:string,
+        account:string,
         bankCardID:string,
         address:string,
         shoppingCartID:string,
         clientID:string,
         billingAddress:string){
         
-            this._account = acount;
+            this._account = account;
             this._bankCardID = bankCardID;
             this._address = address;
             this._shoppingCartID = shoppingCartID;

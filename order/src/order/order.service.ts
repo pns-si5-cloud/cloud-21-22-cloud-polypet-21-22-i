@@ -52,26 +52,27 @@ export class OrderService {
         shoppingCartInfoDTO.clientID = shoppingCartJson.clientID;
         shoppingCartInfoDTO.items = shoppingCartItemDTOList;
 
-        console.log("get shopping cart info :"+shoppingCartInfoDTO);
+        console.log("get shopping cart info :"+JSON.stringify(shoppingCartInfoDTO));
         return shoppingCartInfoDTO;
     }
 
     public async getProductInfo(productID:string):Promise<ProductInfoDTO>{
-        var productJSON:{name,price,category,description,partnerID,ingredient,productID,addedDate}
+        var productJSON:{_name,_price,_category,_description,_partnerID,_ingredient,_productID,_addedDate}
             = await firstValueFrom(this.http.get(this.URL_PRODUCT_DETAILED, {params: {productID:productID}}))
             .then((body)=> {
                 return body.data;
             });
-
+        
+        console.log("productJSON :"+ JSON.stringify(productJSON))
         var productInfo = new ProductInfoDTO();
-        productInfo.name = productJSON.name;
-        productInfo.price = +productJSON.price;
+        productInfo.name = productJSON._name;
+        productInfo.price = +productJSON._price;
 
-        console.log("get product info :"+productInfo);
+        console.log("get product info :"+JSON.stringify(productInfo));
         return productInfo;
     }
 
-    public createDeliveryInDB(address:string,billingAddress:string,clientID:string,status:string,totalPrice:number,items:Items[]){
+    public async createDeliveryInDB(address:string,billingAddress:string,clientID:string,status:string,totalPrice:number,items:Items[]){
         var delivery= new Delivery();
 
         delivery.address=address;
@@ -82,9 +83,10 @@ export class OrderService {
         delivery.totalPrice=totalPrice;
         delivery.items=items;
 
-        console.log("create delivery in DB :"+delivery);
 
-        this.DeliveryRepository.save(delivery);
+        delivery = await this.DeliveryRepository.save(delivery);
+        console.log("create delivery in DB :"+JSON.stringify(delivery));
+        console.log("create delivery in DB with deliveryID :"+JSON.stringify(delivery.deliveryID));
         return delivery;
     }
 
@@ -97,7 +99,7 @@ export class OrderService {
         item.quantity=quantity
 
         this.ItemsRepository.save(item);
-        console.log("create item in DB :"+item);
+        console.log("create item in DB :"+JSON.stringify(item));
 
         return item;
     }
@@ -117,12 +119,12 @@ export class OrderService {
         for(var i =0; i<productList.length;i++){
             var shoppingCartItem = shoppingCart.items[i];
 
-            var item = this.createItemInDB(shoppingCartItem.productID,productList[i].name,
+            var item = await this.createItemInDB(shoppingCartItem.productID,productList[i].name,
                 productList[i].price,shoppingCartItem.quantity);
 
             itemsList.push(item);
         }
-        return this.createDeliveryInDB(address,billingAddress,clientID,"En attente de validation de paiement",totalPrice,itemsList);
+        return await this.createDeliveryInDB(address,billingAddress,clientID,"En attente de validation de paiement",totalPrice,itemsList);
     }
 
     public getTotalPrice(productInfoList:ProductInfoDTO[],shoppingCartItemList:ShoppingCartItemDTO[]):number{
@@ -133,7 +135,7 @@ export class OrderService {
         var totalPrice:number = 0;
 
         for(var i =0; i<productInfoList.length;i++){
-            totalPrice += productInfoList[i].price * shoppingCartItemList[i].quantity;
+            totalPrice += (+productInfoList[i].price) * (+shoppingCartItemList[i].quantity);
         }
         console.log("get total price :"+totalPrice);
 
@@ -161,7 +163,7 @@ export class OrderService {
                 var message = {deliveryID:deliveryID};
                 this.http.post(this.URL_SHIPPING,message)
                 .subscribe({
-                    next : (response)=> console.debug("[validation] deliveryID:" + deliveryID +" sended to shipping"),
+                    next : (response)=> console.debug("[validation] deliveryID:" +JSON.stringify(message) +" sended to shipping"),
                     error : (error)=> console.error("[validation] "+error),
                 });
         }

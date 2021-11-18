@@ -1,7 +1,8 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Delivery } from 'src/models/Delivery';
 import { Items } from 'src/models/Items';
+import { JwtDecodeMiddleware } from './middlewares/jwt-decode.middleware';
 import { ShippingController } from './shipping/shipping.controller';
 import { ShippingService } from './shipping/shipping.service';
 
@@ -24,4 +25,12 @@ const dbSocketPath = process.env.DB_SOCKET_PATH || '/cloudsql';
   controllers: [ShippingController],
   providers: [ShippingService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(JwtDecodeMiddleware)
+      .forRoutes(
+        '*',
+      );
+  }
+}

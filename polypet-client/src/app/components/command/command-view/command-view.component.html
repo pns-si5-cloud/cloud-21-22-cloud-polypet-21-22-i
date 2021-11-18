@@ -1,0 +1,14 @@
+<h2>Order : {{commandID}}</h2>
+<p>Status : {{command.status}}</p>
+<p>Address : {{command.address}}</p>
+<p>Delivery date : {{command.deliveryDate}}</p>
+<p>Total price : {{command.totalPrice}}</p>
+<p>Billing address : {{command.billingAddress}}</p>
+<p>Payment date : {{command.paiementDate}}</p>
+<ol>
+    <li *ngFor="let commandItem of command.items">
+        <p>Product name : {{commandItem.name}}</p>
+        <p>Quantity : {{commandItem.quantity}}</p>
+        <p>Unitary price : {{commandItem.unitaryPrice}}</p>
+    </li>
+</ol>

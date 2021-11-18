@@ -1,7 +1,4 @@
 import { Body, Controller, Request, Post, UseGuards, Get } from '@nestjs/common';
-import { AuthService } from 'src/auth/auth/auth.service';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { CustomerDTO } from 'src/dto/customer-dto';
 import { EmployeeDTO } from 'src/dto/employee-dto';
 import { PartnerDTO } from 'src/dto/partner-dto';
@@ -12,7 +9,7 @@ import { AccountService } from 'src/services/account/account.service';
 
 @Controller('account')
 export class AccountController {
-    constructor(private accountService: AccountService, private authService: AuthService) {}
+    constructor(private accountService: AccountService) {}
 
     @Post('new-customer')
     registerNewCustomer(
@@ -36,17 +33,4 @@ export class AccountController {
         return this.accountService.registerNewPartner(partner);
     }
 
-    @UseGuards(LocalAuthGuard)
-    @Post('auth/login')
-    async login(@Request() req) {
-        console.log("[login]");
-        return this.authService.login(req.user);
-    }
-
-    @UseGuards(JwtAuthGuard)
-    @Get('profile')
-    getProfile(@Request() req) {
-        console.log("[getProfile]");
-      return req.user;
-    }
 }

@@ -1,5 +1,5 @@
 <div class="shopping-cart-item-list">
-  <p *ngIf="shoppingCartItemList?.length==0">No product found</p>
+  <p *ngIf="shoppingCartItemList?.length==0">No shopping cart found</p>
   <app-shopping-cart-item-list-item *ngFor="let item of shoppingCartItemList"
                          [item]="item">
 

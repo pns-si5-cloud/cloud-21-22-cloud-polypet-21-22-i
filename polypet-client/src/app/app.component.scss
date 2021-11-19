@@ -1,9 +1,18 @@
 .companyName{
   font-size: 150%;
+  color: rgb(76, 143, 194);
 }
 
 .mat-toolbar{
 height: 7vh;
+color: rgb(6, 50, 100);
+background-color: rgb(222, 239, 247);
+font-size: 130%;
+}
+
+.fit-picture{
+  height: 5vh;
+  margin-right: 3vh;
 }
 
 div {
@@ -17,7 +26,9 @@ min-height: 93vh !important;
 
 a{
   text-decoration: none;
-  font-size: 110%;
+  font-size: 100%;
+  font-weight: bold;
+  color: rgb(76, 143, 194);
   white-space: normal;
 }
 

@@ -155,8 +155,6 @@ paths:
     options:
       summary: product creator, employee validate new product
       operationId: product-creator-validate-new-product-cors
-      security:
-        - firebase: []
       x-google-backend:
         address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -179,8 +177,6 @@ paths:
     options:
       summary: product creator, partener request to add product
       operationId: product-creator-add-new-product-request-cors
-      security:
-        - firebase: []
       x-google-backend:
         address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -203,8 +199,6 @@ paths:
     options:
       summary: employee request all product
       operationId: product-creator-all-product-requests-cors
-      security:
-        - firebase: []
       x-google-backend:
         address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -233,8 +227,6 @@ paths:
     options:
       summary: employee request detail product
       operationId: product-creator-get-detailed-product-request-cors
-      security:
-        - firebase: []
       x-google-backend:
         address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS

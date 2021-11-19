@@ -62,10 +62,12 @@ export class ShoppingCartController {
     throw new BadRequestException('undefined shopping cart');
   }
 
-  @Delete()
-  async deleteShoppingCart(@Query('cartID') cartID: string) {
-    if (!(await this.shoppingCartService.deleteShoppingCart(cartID))) {
+  @Get('delete')
+  async deleteShoppingCart(@Query('clientID') clientID: string) {
+    console.log('called delete with' + clientID);
+    if (!(await this.shoppingCartService.deleteShoppingCart(clientID))) {
       throw new BadRequestException('undefined shopping cart');
     }
+    return 'deleted';
   }
 }

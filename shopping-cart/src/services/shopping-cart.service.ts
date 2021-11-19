@@ -143,9 +143,9 @@ export class ShoppingCartService {
     }
   }
 
-  async deleteShoppingCart(cartID: string) {
+  async deleteShoppingCart(clientID: string) {
     const cart = await this.cartRepository.findOne({
-      where: { cartID: cartID },
+      where: { clientID: clientID },
     });
     if (cart == undefined) return false;
     const items = await this.itemRepository.find({

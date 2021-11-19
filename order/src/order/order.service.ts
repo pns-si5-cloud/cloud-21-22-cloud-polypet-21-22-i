@@ -55,9 +55,13 @@ export class OrderService {
         console.log("get shopping cart info :"+JSON.stringify(shoppingCartInfoDTO));
         return shoppingCartInfoDTO;
     }
+    public async getClientIDFromDeliveryID(deliveryID){
+        var deliveryLocal = await this.DeliveryRepository.findOne({where:{deliveryID:deliveryID}});
 
+        return deliveryLocal.clientID
+    }
     public async getProductInfo(productID:string):Promise<ProductInfoDTO>{
-        var productJSON:{_name,_price,_category,_description,_partnerID,_ingredient,_productID,_addedDate}
+        var productJSON:{name,price,category,description,partnerID,dimension,ingredient,productID,addedDate}
             = await firstValueFrom(this.http.get(this.URL_PRODUCT_DETAILED, {params: {productID:productID}}))
             .then((body)=> {
                 return body.data;
@@ -65,8 +69,8 @@ export class OrderService {
         
         console.log("productJSON :"+ JSON.stringify(productJSON))
         var productInfo = new ProductInfoDTO();
-        productInfo.name = productJSON._name;
-        productInfo.price = +productJSON._price;
+        productInfo.name = productJSON.name;
+        productInfo.price = +productJSON.price;
 
         console.log("get product info :"+JSON.stringify(productInfo));
         return productInfo;
@@ -156,7 +160,7 @@ export class OrderService {
         });
     }
 
-    public validation(status:string,deliveryID:string){
+    public async validation(status:string,deliveryID:string,clientID:string){
         console.log("La banque renvoie une validation status "+ status +" vers order pour le deliveryID :"+deliveryID)
         
         if (status=="Paiement accepté"){
@@ -166,8 +170,16 @@ export class OrderService {
                     next : (response)=> console.debug("[validation] deliveryID:" +JSON.stringify(message) +" sended to shipping"),
                     error : (error)=> console.error("[validation] "+error),
                 });
+                await firstValueFrom(this.http.get(this.URL_SHOPPING_CART+"/delete", {params: {clientID:clientID}}))
+                .then((body)=> {
+                    console.log("deleted : " +body.data);
+                });
+                console.log("delete cartID:"+clientID)
         }
         else {
+            var delivery = await this.DeliveryRepository.findOne({where:{deliveryID:deliveryID}})
+            delivery.status=status;
+            await this.DeliveryRepository.save(delivery);
             console.log("Paiement refusé")
         }
         return status

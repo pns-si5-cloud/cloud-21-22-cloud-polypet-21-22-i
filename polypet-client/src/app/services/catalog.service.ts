@@ -21,4 +21,8 @@ export class CatalogService {
     return firstValueFrom(this.http.get<Product>(environment.catalog_url.CATALOG_GET_PRODUCT_DETAIL,{params:{productID}}).pipe(map((data: object)=>Object.setPrototypeOf(data, Product.prototype)
     )))
   }
+
+  getLastestProducts(): Promise<NotDetailedProduct[]> {
+    return firstValueFrom(this.http.get<NotDetailedProduct[]>(environment.catalog_url.CATALOG_GET_LAST_PRODUCT));
+  }
 }

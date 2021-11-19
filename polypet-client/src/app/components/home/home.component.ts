@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NotDetailedProduct } from 'src/app/classes/not-detailed-product';
-import { CatalogService } from 'src/app/services/catalog.service'
+import { CatalogService } from 'src/app/services/catalog.service';
 
 @Component({
   selector: 'app-home',
@@ -10,14 +10,14 @@ import { CatalogService } from 'src/app/services/catalog.service'
 export class HomeComponent implements OnInit {
 
   constructor(private catalogService:CatalogService) { }
-  allProductsNotDetailed:Promise<NotDetailedProduct[]>|undefined
+  lastestProductsNotDetailed:Promise<NotDetailedProduct[]>|undefined
 
   ngOnInit(): void {
-    this.allProductsNotDetailed = this.getAllProduct()
+    this.lastestProductsNotDetailed = this.getAllProduct()
   }
 
   async getAllProduct():Promise<NotDetailedProduct[]>{
-    return this.catalogService.getAllProductNotDetails().catch((err)=>{
+    return this.catalogService.getLastestProducts().catch((err)=>{
       console.error(err);
       return []
     })

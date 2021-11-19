@@ -14,7 +14,7 @@ export class BankService {
         private cardRepository: Repository<Card>){
         }
 
-    private URL_ORDER = environment.order.URL_VALIDATION_ORDER;
+    private URL_ORDER = "https://order-dot-si5-cloud-i.oa.r.appspot.com/order/validation";
         
     //un compte à plusieurs cartes, chaque carte à une valeur amount qui est le solde de la carte
 
@@ -56,25 +56,34 @@ export class BankService {
     }
     public async checkIfCanPay(cardID,amountToPay){
         var card = await this.cardRepository.findOne({where:{cardID:cardID}});
+        if (undefined==card){
+            return false
+        }
+        if (card==null){
+            return false
+        }
+        var cardAmount = +card.amount
 
-        return (card.amount>=amountToPay)
+        return (cardAmount>=amountToPay)
     }
     
     public async getBalance(account:string):Promise<{ accountID: string; cards: { cardID: string; amount: number; }[]; totalAmount: number; }>{
-        var cards:{cardID:string,amount:number}[] = await this.getAllCardFromAccount(account)[1];
+        var cards:{cardID:string,amount:number}[] = await this.getAllCardFromAccount(account);
         
         var json = {accountID:account,cards:cards,totalAmount:await this.getTotalAmount(account)}
+        console.log("Balance : "+json);
         return json;
     }
     
-    public async tryDoTransaction(xml:any,deliveryID:string){
+    public tryDoTransaction(xml:any,deliveryID:string){
         var json = JSON.parse(parser.toJson(xml))
         var totalToPay = +json["Transaction"]["amount"]
         var account = json["Transaction"]["account"]
-        var cardID = json["Transaction"]["card"]
+        var card = json["Transaction"]["card"]
 
         var status;
-        if (await this.checkIfCanPay(cardID,totalToPay)){
+        if (this.checkIfCanPay(card,totalToPay)){
+            this.addAmount(card,-totalToPay)
             status = "Paiement accepté"
             console.log("[tryDotransaction] The account "+ account + "can pay this amount :"+totalToPay)
 

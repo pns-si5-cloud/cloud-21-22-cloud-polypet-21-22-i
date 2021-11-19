@@ -28,7 +28,13 @@ export class ShippingService {
         var delivery:Delivery = await this.deliveryRepository.findOne({where: {deliveryID:deliveryID}});
         console.log("get delivery "+deliveryID + " : "+JSON.stringify(delivery));
         return delivery;
-    }   
+    }
+    
+    public async getItems(delivery:Delivery){
+        var items:Items[] = await this.ItemsRepository.find({where: {delivery:delivery}});
+        console.log("get items for delivery : "+delivery + " : items[]"+items);
+        return items;
+    }      
 
     public async setDeliveryDate(deliveryDateDTO:DeliveryDateDTO){
         var delivery:Delivery = await this.getDelivery(deliveryDateDTO.deliveryID);

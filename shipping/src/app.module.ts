@@ -30,7 +30,7 @@ export class AppModule {
     consumer
       .apply(JwtDecodeMiddleware)
       .forRoutes(
-        '*',
+        'client-command',
       );
   }
 }

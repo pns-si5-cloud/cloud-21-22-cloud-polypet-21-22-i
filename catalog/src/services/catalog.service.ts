@@ -39,11 +39,12 @@ export class CatalogService {
 
     public async getLatestProducts():Promise<Product[]>{
 
-        var now = new Date();
-        var tenDaysBefore = new Date();
-        tenDaysBefore.setDate(tenDaysBefore.getDate()-10)
+        var lastestProductsList = await this.productRepository.find({
+            order: {addedDate:"DESC"}, take:5});
 
-        var lastestProductsList = await this.productRepository.find({where:{addedDate:Between(tenDaysBefore,now)}});
+        if(lastestProductsList.length != 5)
+            throw new Error("MORE THAN 5 LATEST PRODUCT :"+lastestProductsList);
+
         console.log("Get latest products : "+JSON.stringify(lastestProductsList));
         return lastestProductsList;
     }

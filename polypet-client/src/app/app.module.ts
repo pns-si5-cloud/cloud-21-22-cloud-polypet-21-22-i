@@ -46,7 +46,6 @@ import { PaymentPanelComponent } from './order/payment/payment-panel/payment-pan
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

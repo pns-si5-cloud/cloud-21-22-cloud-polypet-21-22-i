@@ -1,4 +1,7 @@
+<div><h1>Your shopping cart</h1>
 <app-shopping-cart-item-list [shoppingCartItemList]="(shoppingCart|async)?.items"></app-shopping-cart-item-list>
-<p>Total price : {{(shoppingCart|async)?.totalPrice}} €</p>
+<p>Total price : {{(shoppingCart|async)?.totalPrice}} €</p></div>
 <div>
-<app-payment-panel></app-payment-panel></div>
+    <h1>Proceed to payment</h1>
+<app-payment-panel></app-payment-panel>
+<br></div>

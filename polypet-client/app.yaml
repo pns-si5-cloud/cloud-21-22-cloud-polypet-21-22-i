@@ -1,5 +1,5 @@
 runtime: python27
-service: angular-client
+service: polypet-client
 api_version: 1
 threadsafe: yes
 

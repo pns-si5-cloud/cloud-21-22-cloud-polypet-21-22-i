@@ -17,8 +17,8 @@ export const environment = {
     CATALOG_GET_PRODUCT_DETAIL:CATALOG_HOST+"catalog/get-detailed-product",
     CATALOG_GET_LAST_PRODUCT:CATALOG_HOST+"catalog/get-latest-products",
   },
-  order: { 
-    PROCEED_TO_PAYMENT: ORDER_HOST + "order/proceed-to-payment" 
+  order: {
+    PROCEED_TO_PAYMENT: ORDER_HOST + "order/proceed-to-payment"
   },
   product_creator_url:{
     ADD_PRODUCT:PRODUCT_CREATOR_HOST+"product-request/add-new-product",
@@ -33,7 +33,7 @@ export const environment = {
     COMMAND_GET_COMMAND_STATUS:COMMAND_HOST+"get-command-status",
     COMMAND_GET_DELIVERY_INFO:COMMAND_HOST+"delivery-information",
     COMMAND_SET_DELIVERY_DATE:COMMAND_HOST+"set-delivery-date",
-    PAIEMENT_CONFIRMATION_SHIPPING: COMMAND_HOST + "paiement-confirmation" 
+    PAIEMENT_CONFIRMATION_SHIPPING: COMMAND_HOST + "paiement-confirmation"
   },
   mock:{
     BANK_ADD_CARD:MOCK_HOST+"add-card",

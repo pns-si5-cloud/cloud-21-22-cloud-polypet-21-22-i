@@ -40,9 +40,9 @@ export class ShoppingCartService {
       message.items.push({
         item: { productID: item.productID, quantity: item.quantity },
       });
-      await this.itemRepository.remove(item);
+      //await this.itemRepository.remove(item);
     }
-    await this.cartRepository.remove(cart);
+    //await this.cartRepository.remove(cart);
     return message;
   }
 

@@ -22,7 +22,8 @@ export class ShippingController {
         console.log("[get-command-status] deliveryID:"+deliveryID);
 
         var delivery:Delivery = await this.shippingService.getDelivery(deliveryID);
-        var commandStatusDTO = CommandStatusDTO.createCommandStatusDTOFromDelivery(delivery);
+        var items = await this.shippingService.getItems(delivery);
+        var commandStatusDTO = CommandStatusDTO.createCommandStatusDTOFromDelivery(delivery,items);
         console.log("return command status : "+JSON.stringify(commandStatusDTO));
 
         return commandStatusDTO;
@@ -40,7 +41,8 @@ export class ShippingController {
         console.log("[delivery-information] deliveryID:"+deliveryID);
 
         var delivery = await this.shippingService.getDelivery(deliveryID);
-        var deliveryInfoDTO = DeliveryInfoDTO.createDeliveryInfoDTOFromDelivery(delivery);
+        var items = await this.shippingService.getItems(delivery);
+        var deliveryInfoDTO = DeliveryInfoDTO.createDeliveryInfoDTOFromDelivery(delivery,items);
 
         console.log("return delivery info : "+JSON.stringify(deliveryInfoDTO));
         return deliveryInfoDTO;

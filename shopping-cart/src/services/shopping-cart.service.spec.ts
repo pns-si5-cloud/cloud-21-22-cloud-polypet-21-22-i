@@ -271,14 +271,14 @@ describe('Catalog Service', () => {
         },
       },
     });
-    expect(repositoryMockCart.remove).toHaveBeenCalledWith({
+    /*expect(repositoryMockCart.remove).toHaveBeenCalledWith({
       cartID: 'cartID',
       clientID: 'clientID',
     });
     expect(repositoryMockItem.remove).toHaveBeenCalledWith({
       productID: 'productID',
       quantity: 2,
-    });
+    });*/
     expect(cart.cartID).toEqual('cartID');
     expect(cart.clientID).toEqual('clientID');
     expect(cart.items.length).toEqual(1);

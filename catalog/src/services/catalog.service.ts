@@ -42,7 +42,7 @@ export class CatalogService {
         var lastestProductsList = await this.productRepository.find({
             order: {addedDate:"DESC"}, take:5});
 
-        if(lastestProductsList.length != 5)
+        if(lastestProductsList.length > 5)
             throw new Error("MORE THAN 5 LATEST PRODUCT :"+lastestProductsList);
 
         console.log("Get latest products : "+JSON.stringify(lastestProductsList));

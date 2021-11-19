@@ -4,7 +4,7 @@ import { OneToMany,PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Delivery {
 
-    @PrimaryGeneratedColumn({name:"delivery_id"})
+    @PrimaryGeneratedColumn("uuid",{name:"delivery_id"})
     deliveryID: string;
 
     @OneToMany(type => Items, items => items.delivery)

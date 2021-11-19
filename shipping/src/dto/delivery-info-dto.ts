@@ -1,4 +1,5 @@
 import { Delivery } from "src/models/Delivery";
+import { Items } from "src/models/Items";
 import { ItemDTO } from "./item-dto";
 
 
@@ -12,11 +13,11 @@ export class DeliveryInfoDTO {
         )
     {}
 
-    public static createDeliveryInfoDTOFromDelivery(delivery:Delivery):DeliveryInfoDTO{
+    public static createDeliveryInfoDTOFromDelivery(delivery:Delivery,items:Items[]):DeliveryInfoDTO{
         if(!delivery) return undefined;
 
         var listItemDTO:ItemDTO[] = [];
-        for(let item of delivery.items){
+        for(let item of items){
             listItemDTO.push(ItemDTO.createItemDTOFromItems(item));
         }
 

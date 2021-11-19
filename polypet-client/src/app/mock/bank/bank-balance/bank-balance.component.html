@@ -1,14 +1,16 @@
 <form (ngSubmit)="onSubmit(value)" #value="ngForm">
     <div class="form-group">
         <label for="accountID">
-            Account ID :
+            Account ID
         </label>
         <input type="text" name ="accountID" class="form-control" ngModel>
     </div>
+    <div class="center">
     <button class="btn btn-primary" type="submit" value="Send">Get balance</button>
+    </div>
 </form>
 <div>
-    <p>Account cards :</p>
+    <p>Account cards</p>
     <ul>
         <li *ngFor="let card of balance.cards">
             <p>Card ID : {{card.cardID}}</p>

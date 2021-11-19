@@ -1,4 +1,5 @@
 import { Delivery } from "src/models/Delivery";
+import { Items } from "src/models/Items";
 import { ItemDTO } from "./item-dto";
 
 
@@ -15,11 +16,11 @@ export class CommandStatusDTO {
         )
     {}
 
-    public static createCommandStatusDTOFromDelivery(delivery:Delivery):CommandStatusDTO{
+    public static createCommandStatusDTOFromDelivery(delivery:Delivery,items:Items[]):CommandStatusDTO{
         if(!delivery) return undefined;
-
+        console.log("delivery.items :"+ items)
         var listItemDTO:ItemDTO[] = [];
-        for(let item of delivery.items){
+        for(let item of items){
             listItemDTO.push(ItemDTO.createItemDTOFromItems(item));
         }
 

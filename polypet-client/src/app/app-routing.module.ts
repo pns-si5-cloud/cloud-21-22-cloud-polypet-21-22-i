@@ -17,7 +17,6 @@ import { DeliveryViewComponent } from './polypet-partner/delivery-view/delivery-
 import { PanelPartnerComponent } from './polypet-partner/panel-partner/panel-partner.component';
 import { AuthGuard } from './shared/guard/auth.guard';
 import {ShoppingCartComponent} from "./components/shopping-cart/shopping-cart.component";
-import { PaymentPanelComponent } from './order/payment/payment-panel/payment-panel.component';
 
 const routes: Routes = [
   { path: 'catalog/product-details/:id', component: ProductViewComponent },
@@ -36,7 +35,6 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'shopping-cart', component: ShoppingCartComponent },
-  { path: 'order',component:PaymentPanelComponent},
   { path: '', component: HomeComponent }
 ];
 

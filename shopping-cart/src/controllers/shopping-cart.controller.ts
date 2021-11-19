@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Post,
   Query,
@@ -59,5 +60,12 @@ export class ShoppingCartController {
       return msg;
     }
     throw new BadRequestException('undefined shopping cart');
+  }
+
+  @Delete()
+  async deleteShoppingCart(@Query('cartID') cartID: string) {
+    if (!(await this.shoppingCartService.deleteShoppingCart(cartID))) {
+      throw new BadRequestException('undefined shopping cart');
+    }
   }
 }

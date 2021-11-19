@@ -40,9 +40,7 @@ export class ShoppingCartService {
       message.items.push({
         item: { productID: item.productID, quantity: item.quantity },
       });
-      //await this.itemRepository.remove(item);
     }
-    //await this.cartRepository.remove(cart);
     return message;
   }
 
@@ -143,5 +141,21 @@ export class ShoppingCartService {
     } catch (error) {
       return undefined;
     }
+  }
+
+  async deleteShoppingCart(cartID: string) {
+    const cart = await this.cartRepository.findOne({
+      where: { cartID: cartID },
+    });
+    if (cart == undefined) return false;
+    const items = await this.itemRepository.find({
+      where: { cart: cart },
+    });
+    for (const item of items) {
+      await this.itemRepository.remove(item);
+    }
+    await this.cartRepository.remove(cart);
+
+    return true;
   }
 }

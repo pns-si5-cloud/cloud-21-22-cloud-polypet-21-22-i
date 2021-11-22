@@ -2,12 +2,12 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-const CATALOG_HOST = "https://catalog-dot-si5-cloud-i.oa.r.appspot.com/"
-const PRODUCT_CREATOR_HOST = "https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/"
-const COMMAND_HOST = "https://shipping-dot-si5-cloud-i.oa.r.appspot.com/"
+const CATALOG_HOST = "https://auth-gateway-khl577n.wl.gateway.dev/"
+const PRODUCT_CREATOR_HOST = "https://auth-gateway-khl577n.wl.gateway.dev/"
+const COMMAND_HOST = "https://auth-gateway-khl577n.wl.gateway.dev/"
 const MOCK_HOST = "https://mock-dot-si5-cloud-i.oa.r.appspot.com/"
-const SHOPPING_CART_HOST = "https://shopping-cart-dot-si5-cloud-i.oa.r.appspot.com/"
-const ORDER_HOST = 'https://order-dot-si5-cloud-i.oa.r.appspot.com/';
+const SHOPPING_CART_HOST = "https://auth-gateway-khl577n.wl.gateway.dev/"
+const ORDER_HOST = 'https://auth-gateway-khl577n.wl.gateway.dev/';
 
 
 export const environment = {

@@ -131,8 +131,6 @@ paths:
     options:
       summary: product creator, employee add new product
       operationId: product-creator-add-new-product-cors
-      security:
-        - firebase: []
       x-google-backend:
         address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -199,6 +197,28 @@ paths:
     options:
       summary: employee request all product
       operationId: product-creator-all-product-requests-cors
+      x-google-backend:
+        address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: all product return success
+
+  /product-request/delete-product-request: 
+    post:
+      summary: delete-product-request
+      operationId: delete-product-request
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: all product return 
+    options:
+      summary: delete-product-request
+      operationId: delete-product-request-cors
       x-google-backend:
         address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -371,6 +391,28 @@ paths:
     options:
       summary: delivery-information
       operationId: delivery-information-cors
+      x-google-backend:
+        address: https://shipping-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response
+
+  /set-delivery-date:
+    post:
+      summary: set-delivery-date
+      operationId: set-delivery-date
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://shipping-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response
+    options:
+      summary: set-delivery-date
+      operationId: set-delivery-date-cors
       x-google-backend:
         address: https://shipping-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS

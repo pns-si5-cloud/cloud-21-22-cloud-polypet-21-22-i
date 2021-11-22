@@ -1,5 +1,10 @@
 # openapi2-appengine.yaml
 swagger: "2.0"
+host: "auth-gateway-khl577n.wl.gateway.dev"
+x-google-endpoints:
+- name: "auth-gateway-khl577n.wl.gateway.dev"
+  allowCors: True
+
 info:
   title: API
   description: API gateway test
@@ -21,6 +26,15 @@ paths:
       responses:
         "200":
           description: product add success
+    options:
+      summary: add product to catalog
+      operationId: catalog-add-product-cors
+      x-google-backend:
+        address: https://catalog-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: product add success
 
   /catalog/get-all-products: 
     get:
@@ -32,11 +46,29 @@ paths:
       responses:
         "200":
           description: all product return success
+    options:
+      summary: add product to catalog
+      operationId: catalog-get-all-product-cors
+      x-google-backend:
+        address: https://catalog-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: product add success
 
   /catalog/get-detailed-product: 
     get:
       summary: get detail product in catalog
       operationId: catalog-get-detailed-product
+      x-google-backend:
+        address: https://catalog-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: all product return success
+    options:
+      summary: get detail product in catalog
+      operationId: catalog-get-detailed-product-cors
       x-google-backend:
         address: https://catalog-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -54,6 +86,15 @@ paths:
       responses:
         "200":
           description: latest product return success
+    options:
+      summary: get latest product in catalog
+      operationId: catalog-get-latest-products-options
+      x-google-backend:
+        address: https://catalog-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: latest product return success
 
   /catalog/verify-product: 
     get:
@@ -65,11 +106,33 @@ paths:
       responses:
         "200":
           description: latest product return success
+    options:
+      summary: verify product in catalog
+      operationId: catalog-verify-product-cors
+      x-google-backend:
+        address: https://catalog-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: latest product return success
 
   /product-request/add-new-product: 
     post:
       summary: product creator, employee add new product
       operationId: product-creator-add-new-product
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: product add success
+    options:
+      summary: product creator, employee add new product
+      operationId: product-creator-add-new-product-cors
+      security:
+        - firebase: []
       x-google-backend:
         address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -81,6 +144,17 @@ paths:
     post:
       summary: product creator, employee validate new product
       operationId: product-creator-validate-new-product
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: product validate success
+    options:
+      summary: product creator, employee validate new product
+      operationId: product-creator-validate-new-product-cors
       x-google-backend:
         address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -92,6 +166,17 @@ paths:
     post:
       summary: product creator, partener request to add product
       operationId: product-creator-add-new-product-request
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: product request success
+    options:
+      summary: product creator, partener request to add product
+      operationId: product-creator-add-new-product-request-cors
       x-google-backend:
         address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -103,6 +188,17 @@ paths:
     get:
       summary: employee request all product
       operationId: product-creator-all-product-requests
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: all product return 
+    options:
+      summary: employee request all product
+      operationId: product-creator-all-product-requests-cors
       x-google-backend:
         address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -112,8 +208,25 @@ paths:
 
   /product-request/get-detailed-product-request: 
     get:
+      parameters:
+      - name: productID
+        in: query
+        description: productID
+        required: true
+        type: string
       summary: employee request detail product
       operationId: product-creator-get-detailed-product-request
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: get detailed product return success
+    options:
+      summary: employee request detail product
+      operationId: product-creator-get-detailed-product-request-cors
       x-google-backend:
         address: https://product-creator-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -151,6 +264,15 @@ paths:
       responses:
         "200":
           description: A successful response
+    options:
+      summary: account-service
+      operationId: account-service-cors
+      x-google-backend:
+        address: https://account-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response
 
   /order/{paths=**}:
     parameters:
@@ -181,17 +303,20 @@ paths:
       responses:
         "200":
           description: A successful response
+    options:
+      summary: order-service
+      operationId: order-service-cors
+      x-google-backend:
+        address: https://order-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response
 
-  /shipping/{paths=**}:
-    parameters:
-    - name: paths
-      in: path
-      description: paths
-      required: true
-      type: string
-    get:
-      summary: shipping-service
-      operationId: shipping-service
+  /paiement-confirmation:
+    post:
+      summary: paiement-confirmation
+      operationId: paiement-confirmation
       security:
         - firebase: []
       x-google-backend:
@@ -200,11 +325,96 @@ paths:
       responses:
         "200":
           description: A successful response
-    post:
-      summary: shipping-service
-      operationId: shipping-service-post
+    options:
+      summary: paiement-confirmation
+      operationId: paiement-confirmation-cors
+      x-google-backend:
+        address: https://shipping-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response
+
+  /get-command-status:
+    get:
+      summary: get-command-status
+      operationId: get-command-status
       security:
         - firebase: []
+      x-google-backend:
+        address: https://shipping-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response    
+    options:
+      summary: get-command-status
+      operationId: get-command-status-cors
+      x-google-backend:
+        address: https://shipping-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response
+  /delivery-information:
+    get:
+      summary: delivery-information
+      operationId: delivery-information
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://shipping-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response
+    options:
+      summary: delivery-information
+      operationId: delivery-information-cors
+      x-google-backend:
+        address: https://shipping-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response
+
+  /client-command:
+    get:
+      summary: client-command
+      operationId: client-command
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://shipping-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response
+    options:
+      summary: client-command
+      operationId: client-command-cors
+      x-google-backend:
+        address: https://shipping-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response
+
+  /paiement-confirmation:
+    post:
+      summary: paiement-confirmation
+      operationId: paiement-confirmation
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://shipping-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response
+    options:
+      summary: paiement-confirmation
+      operationId: paiement-confirmation-cors
       x-google-backend:
         address: https://shipping-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS
@@ -235,6 +445,15 @@ paths:
       operationId: shopping-cart-service-post
       security:
         - firebase: []
+      x-google-backend:
+        address: https://shopping-cart-dot-si5-cloud-i.oa.r.appspot.com/
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: A successful response
+    options:
+      summary: shopping-cart-service
+      operationId: shopping-cart-service-post-cors
       x-google-backend:
         address: https://shopping-cart-dot-si5-cloud-i.oa.r.appspot.com/
         path_translation: APPEND_PATH_TO_ADDRESS

@@ -8,7 +8,7 @@ Tigran 99 points
 Yann 99 points  
   
 # *Scenarios*
-Je suis une société externe, je veux ajouter un article
+*Je suis une société externe, je veux ajouter un article*
 
 a)	Je me connecte à mon espace marketplace via la page "[Sign-in](https://polypet-client-dot-si5-cloud-i.oa.r.appspot.com/sign-in)" 
 1. Cliquer sur (1) puis sur (2) pour s’authentifier avec un compte google

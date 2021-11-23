@@ -7,7 +7,7 @@ export class JwtDecodeMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     console.debug(req)
     const decodedToken: any = jwtDecode(
-      req.header('AuthorizationClient').split(' ')[1],
+      req.header('x-forwarded-authorization').split(' ')[1],
     );
     console.log('decoded token :', JSON.stringify(decodedToken));
     if (req.method == 'GET') {

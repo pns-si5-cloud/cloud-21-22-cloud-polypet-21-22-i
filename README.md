@@ -1,6 +1,7 @@
 ﻿# cloud-21-22-cloud-polypet-21-22-i
 *Scenario :*
-Je suis une société externe, je veux ajouter un article (MVP)
+Je suis une société externe, je veux ajouter un article
+
 a)	Je me connecte à mon espace marketplace via la page « [Sign-in](https://polypet-client-dot-si5-cloud-i.oa.r.appspot.com/sign-in) »  
 1.	Cliquer sur (1) puis sur (2) pour s’authentifier avec un compte google
 ![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/1.png?raw=true)
@@ -26,8 +27,4 @@ f)	Je peux voir le produit dans la liste des nouveaux articles sur “PolyPet”
  ![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/8.png?raw=true)
 1)	Je vois bien mon produit ajouté en haut lorsque on regarde les 5 derniers produits ajoutés
 2)	Je peux voir le détaille du produit en cliquant sur « Preview »
-
-g)	Je consulte les informations détaillées d’un autre produit
- ![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/9.png?raw=true)
-1)	Je clique sur « Preview » d’un autre produit
 

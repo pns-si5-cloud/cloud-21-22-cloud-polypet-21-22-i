@@ -18,6 +18,7 @@ d)	Un membre de l’équipe PolyPet valide la requête d'ajout
 3.	On valide l’ajout du produit en cliquant sur « Validate »
 4.	On attends que le pop-up « Request Validate » s’affiche
  ![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/6.png?raw=true)
+ 
 e)	On constate que l’article est bien ajouté sur “[Catalog](https://polypet-client-dot-si5-cloud-i.oa.r.appspot.com/catalog)”
  ![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/7.png?raw=true)
 1.	Le nouveau produit est à la fin de la liste

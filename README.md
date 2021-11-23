@@ -7,8 +7,7 @@ Lucie 99 points
 Tigran 99 points  
 Yann 99 points  
   
-﻿# cloud-21-22-cloud-polypet-21-22-i
-*Scenario :*
+# *Scenarios*
 Je suis une société externe, je veux ajouter un article
 
 a)	Je me connecte à mon espace marketplace via la page "[Sign-in](https://polypet-client-dot-si5-cloud-i.oa.r.appspot.com/sign-in)" 

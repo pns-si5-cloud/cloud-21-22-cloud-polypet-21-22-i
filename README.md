@@ -1,4 +1,12 @@
 ﻿# cloud-21-22-cloud-polypet-21-22-i
+  
+*Répartition des points :*  
+*Yohann 104 points*  
+Valentin 99 points  
+Lucie 99 points  
+Tigran 99 points  
+Yann 99 points  
+  
 *Scenario :*
 Je suis une société externe, je veux ajouter un article (MVP)
 a)	Je me connecte à mon espace marketplace via la page « [Sign-in](https://polypet-client-dot-si5-cloud-i.oa.r.appspot.com/sign-in) »  
@@ -31,4 +39,3 @@ f)	Je peux voir le produit dans la liste des nouveaux articles sur “[PolyPet](
 g)	Je consulte les informations détaillées d’un autre produit
  ![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/9.png?raw=true)
 1)	Je clique sur « Preview » d’un autre produit
-

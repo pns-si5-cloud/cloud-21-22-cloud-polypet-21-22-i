@@ -181,6 +181,11 @@ export class OrderService {
             delivery.status=status;
             await this.DeliveryRepository.save(delivery);
             console.log("Paiement refusé")
+            await firstValueFrom(this.http.get(this.URL_SHOPPING_CART+"/delete", {params: {clientID:clientID}}))
+                .then((body)=> {
+                    console.log("deleted : " +body.data);
+                });
+                console.log("delete cartID:"+clientID)
         }
         return status
     } 

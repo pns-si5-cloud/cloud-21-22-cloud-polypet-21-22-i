@@ -1,11 +1,43 @@
 # cloud-21-22-cloud-polypet-21-22-i
-  
-**Répartition des points :**  
+Url du web client : <https://polypet-client-dot-si5-cloud-i.oa.r.appspot.com/>
+
+## Répartition des points :  
 Yohann 104 points  
 Valentin 99 points  
 Lucie 99 points  
 Tigran 99 points  
 Yann 99 points  
+
+## Déploiment sur GCP
+Nous n'avons pas en mis en place d'intégration continue. Nous déployions donc nos services sur GCP par des CLI.
+
+### Configuration sur GCP
+Il est possible de faire toute ces étapes depuis l'interface de GCP.  
+- Créer un projet
+- Activer App Engine
+- Créer une base de données (Service SQL)  
+- Créer une Api Gateway (lui donner la config Open API 2 se trouvant dans le dossier Gateway du projet)
+
+### Configuration des services
+Dans les fichiers de configuration app.yaml, il faut paramètrer les variables d'environnement pour accéder à la base de données.   
+
+### Configuration du web client (Polypet client)  
+Il faut configurer le fichier d'environement pour que celui-ci pointe vers la gateway. Il faut également autoriser le client sur GCP - Firebase pour qu'il puisse s'authentifier. 
+
+### Mise en place du déploiement manuel
+La commande pour déployer nos services est `npm run deploy` lorsque l'on se trouve dans le dossier du service.  
+
+Voici la liste des services à deployer : 
+
+- Catalog  
+- Product Creator
+- Shipping
+- Shopping Cart
+- Order   
+
+Pour le web client (Polypet Client) il faut tout d'abord faire la commande `npm run build` avant le `npm run deploy`
+
+## Scénario et explications
 
 **Pré-requis :**  
 - Un compte Google Gmail ou créer un compte sur [la page d'inscription](https://polypet-client-dot-si5-cloud-i.oa.r.appspot.com/sign-up)  

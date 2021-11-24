@@ -51,12 +51,12 @@ Pour le web client (Polypet Client) il faut tout d'abord faire la commande `npm 
 
 ![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/26.png?raw=true) 
 
-5. Pour ajouter de l'argent sur la carte, remplir le numero de la carte (Card ID) et le montant que l'on veut rajouter
+4. Pour ajouter de l'argent sur la carte, remplir le numero de la carte (Card ID) et le montant que l'on veut rajouter
 
 ![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/27.png?raw=true) 
 
 
-7. Attendre le pop-up "Amount added"  
+5. Attendre le pop-up "Amount added"  
 
 ![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/28.png?raw=true) 
 

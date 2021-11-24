@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { NonDetailedProduct } from 'src/dto/non-detailed-product-dto';
 import { ProductDTO } from 'src/dto/product-dto';
 import { Product } from 'src/models/product';
 import { ParseNotNullPipe } from 'src/pipe/parse-not-null.pipe';
@@ -37,14 +38,14 @@ export class CatalogController {
     async getLatestProducts(){
         console.log("[getLategetLatestProductsstProduct]");
         var productList:Product[] = await this.catalogService.getLatestProducts();
-        var productDTOList = []
+        var nonDetailedProductDTOList = []
 
         for(let product of productList){
-            var productDTO = ProductDTO.createProductDTOFromProduct(product);
-            productDTOList.push(productDTO);
+            var nonDetailedProductDTO = new NonDetailedProduct(product.product_id,product.name,product.description);
+            nonDetailedProductDTOList.push(nonDetailedProductDTO);
         }
-        console.log("return product dto list : "+JSON.stringify(productDTOList));
-        return productDTOList;
+        console.log("return latest non detaeiled product list : "+JSON.stringify(nonDetailedProductDTOList));
+        return nonDetailedProductDTOList;
     }
 
     @Get('verify-product')

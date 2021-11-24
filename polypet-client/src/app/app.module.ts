@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from './components/home/home.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductListComponent } from './components/catalog/product-list/product-list.component';
@@ -43,7 +42,6 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { ShoppingCartItemListComponent } from './components/shopping-cart/shopping-cart-item-list/shopping-cart-item-list.component';
 import { ShoppingCartItemListItemComponent } from './components/shopping-cart/shopping-cart-item-list-item/shopping-cart-item-list-item.component';
 import { PaymentPanelComponent } from './order/payment/payment-panel/payment-panel.component';
-
 
 
 
@@ -86,7 +84,6 @@ import { PaymentPanelComponent } from './order/payment/payment-panel/payment-pan
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    FlexLayoutModule,
     HttpClientModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),

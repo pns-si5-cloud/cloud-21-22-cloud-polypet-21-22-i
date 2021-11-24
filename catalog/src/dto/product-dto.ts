@@ -35,7 +35,7 @@ export class ProductDTO {
 
     public toJSON(){
         return {name:this.name,price:this.price,category:this.category,description:this.description,
-            partnerID:this.partnerID,ingredient:this.ingredient,productID:this.productID,addedDate:this.addedDate}
+            partnerID:this.partnerID,ingredient:this.ingredient, dimension:this.dimension,productID:this.productID,addedDate:this.addedDate}
     }
 
     public get dimension(): string {

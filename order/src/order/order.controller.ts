@@ -22,9 +22,9 @@ export class OrderController {
     }
     
     @Post('validation')
-    validation(@Body('status',ParseNotNullPipe) status:string,@Body('deliveryID',ParseNotNullPipe) deliveryID:string) {
+    async validation(@Body('status',ParseNotNullPipe) status:string,@Body('deliveryID',ParseNotNullPipe) deliveryID:string) {
         console.log("[order][validation] status:string "+ status + " deliveryID " + deliveryID);
-
-        return this.orderService.validation(status,deliveryID);
+        var clientID = await this.orderService.getClientIDFromDeliveryID(deliveryID)
+        return await this.orderService.validation(status,deliveryID,clientID);
     }
 }

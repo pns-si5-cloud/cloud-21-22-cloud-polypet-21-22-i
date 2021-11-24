@@ -63,8 +63,10 @@ export class BankService {
             return false
         }
         var cardAmount = +card.amount
-
-        return (cardAmount>=amountToPay)
+        var cond = (cardAmount>=amountToPay)
+        //cardAmount=-cardAmount
+        console.log("cardAmount : "+ cardAmount + " amountToPay :"+ amountToPay+ "card :"+card + "condition :"+cond)
+        return cond;
     }
     
     public async getBalance(account:string):Promise<{ accountID: string; cards: { cardID: string; amount: number; }[]; totalAmount: number; }>{
@@ -75,26 +77,25 @@ export class BankService {
         return json;
     }
     
-    public tryDoTransaction(xml:any,deliveryID:string){
+    public async tryDoTransaction(xml:any,deliveryID:string){
         var json = JSON.parse(parser.toJson(xml))
         var totalToPay = +json["Transaction"]["amount"]
         var account = json["Transaction"]["account"]
         var card = json["Transaction"]["card"]
 
-        var status;
-        if (this.checkIfCanPay(card,totalToPay)){
-            this.addAmount(card,-totalToPay)
+        var status = "Paiement refusé";
+        if (await this.checkIfCanPay(card,totalToPay)){
+            await this.addAmount(card,-totalToPay)
             status = "Paiement accepté"
             console.log("[tryDotransaction] The account "+ account + "can pay this amount :"+totalToPay)
 
         }
         else {
-            status = "Paiement refusé"
             console.log("[tryDotransaction] The account "+ account + "can't pay this amount :"+totalToPay)
         }
 
         var message = {status:status,deliveryID:deliveryID};
-        this.http.post(this.URL_ORDER,message)
+        await this.http.post(this.URL_ORDER,message)
         .subscribe({
             next : (response)=> console.debug("[tryDoTransaction] status and deliveryID sended to order"),
             error : (error)=> console.error("[tryDoTransaction] "+error),

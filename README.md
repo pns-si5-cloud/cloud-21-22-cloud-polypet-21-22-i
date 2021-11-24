@@ -6,7 +6,28 @@ Valentin 99 points
 Lucie 99 points  
 Tigran 99 points  
 Yann 99 points  
-  
+
+**Pré-requis :**  
+- Un compte Google Gmail ou créer un compte sur [la page d'inscirption](https://polypet-client-dot-si5-cloud-i.oa.r.appspot.com/sign-up)  
+- Avoir créer un "Account" et y ajouter une carte de crédit depuis la [bank](https://polypet-client-dot-si5-cloud-i.oa.r.appspot.com/bank) en rajoutant un nom dans le champs prévu pour :  
+1. En remplissant les 2 champs prévu pour Account ID est un string et Card ID un nombre  
+
+![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/25.png?raw=true) 
+
+2. Puis en cliquant sur "Add new credit card"  
+3. Attendre que le pop-up "Card added" apparaît 
+
+![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/26.png?raw=true) 
+
+5. Rajouter de l'argent sur la carte en remplissant le numero de la carte (Card ID) et l'amount que l'on veut rajouter
+
+![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/27.png?raw=true) 
+
+
+7. Attendre le pop-up "Amount added"  
+
+![alt text](https://github.com/pns-si5-cloud/cloud-21-22-cloud-polypet-21-22-i/blob/main/img/28.png?raw=true) 
+
 **Scenario :**
 **Je suis une société externe, je veux ajouter un article (MVP)**
 
